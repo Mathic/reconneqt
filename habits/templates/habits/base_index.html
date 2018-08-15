@@ -1,0 +1,72 @@
+{% extends "habits/base_template.html" %}
+{% load staticfiles %}
+
+{% block title %}ReconneQt - Habits{% endblock %}
+
+{% block css %}
+
+<link href="{% static 'habits/starter-template.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="{% url 'reconneqt' %}">ReconneQt</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Graphs</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">Something</a>
+          <a class="dropdown-item" href="#">Some more</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'habits' %}">Habits</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Forums</a>
+      </li>
+      {% endif %}
+    </ul>
+    <ul class="navbar-nav">
+      {% if user.is_authenticated %}
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle float-right" href="http://example.com" id="userdropdown"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.get_username }}</a>
+          <div class="dropdown-menu" aria-labelledby="userdropdown">
+            <a class="dropdown-item" href="{% url 'logout'%}?next={{request.path}}">Logout</a>
+          </div>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}?next={{request.path}}">Login</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+
+<main role="main" class="container">
+
+  {% block main %}{% endblock %}
+
+</main><!-- /.container -->
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{% static 'habits/like_button.js' %}"></script>
+
+{% endblock %}

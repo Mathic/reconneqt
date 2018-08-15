@@ -1,0 +1,43 @@
+{% extends "habits/index.html" %}
+
+{% block main %}
+
+<div class="starter-template">
+  <h1>ReconneQt Habits</h1>
+  <p class="lead">Create a new habit and add triggers.</p>
+</div>
+
+<table class="table">
+  <tr>
+    <th></th>
+    <th>Habit</th>
+    <th>Triggers</th>
+  </tr>
+  {% for habit in habit_list %}
+  <tr>
+    <td>
+      <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </td>
+    <td>
+      <a href="{% url 'detail' habit.id %}">{{ habit.habit_name }}</a>
+    </td>
+    <td>
+      {% for trigger in trigger_list %}
+        {% for h in trigger.habits.all %}
+          {% if h.id == habit.id %}
+            {{ trigger  }}<br/>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<input type="submit" style="float:right" value="Add Habit" class="btn btn-dark">
+
+<div id="like_button_container"></div>
+
+{% endblock %}

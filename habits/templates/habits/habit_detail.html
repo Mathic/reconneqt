@@ -1,0 +1,11 @@
+{% extends "habits/index.html" %}
+
+{% block main %}
+
+<h1>{{ habit }}</h1>
+
+{% for trigger in habit_triggers %}
+  {{ trigger  }}<br/>
+{% endfor %}
+
+{% endblock %}
