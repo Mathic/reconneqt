@@ -1,1 +1,1 @@
-web: gunicorn conneqt.wsgi
+web: gunicorn reconneqt.wsgi
