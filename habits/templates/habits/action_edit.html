@@ -2,8 +2,13 @@
 
 {% block main %}
 
-<h2>Habit: {{ habit }}</h2>
+{% if action.pk %}
+<h3>Editing {{ action }} in Habit: {{ habit }}</h3>
+{% else %}
+<h3>Create new action in Habit: {{ habit }}</h3>
+{% endif %}
 <br/>
+
 <form method="POST" class="post-form">{% csrf_token %}
   {{ form.as_p }}
   <button type="submit" class="save btn btn-outline-info">Save</button>

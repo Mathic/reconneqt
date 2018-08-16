@@ -16,9 +16,9 @@
       {% for habit in habit_list %}
       <li>
         {% if habit.good_habit %}
-          <a href="{% url 'habit_detail' habit.id %}">{{ habit.habit_name }}</a>
+          <a href="{% url 'habit_detail' habit.id %}" style="color:#008000">{{ habit.habit_name }}</a>
         {% else %}
-          <a href="{% url 'habit_detail' habit.id %}">{{ habit.habit_name }}</a>
+          <a href="{% url 'habit_detail' habit.id %}" style="color:#B22222">{{ habit.habit_name }}</a>
         {% endif %}
       {% endfor %}
       </li>

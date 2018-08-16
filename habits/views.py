@@ -97,7 +97,11 @@ def action_new(request, habit_id):
             return redirect('habit_detail', habit_id=habit_id)
     else:
         form = ActionForm()
-        return render(request, 'habits/action_edit.html', {'form': form})
+    context = {
+        'form': form,
+        'habit': habit
+    }
+    return render(request, 'habits/action_edit.html', context)
 
 def action_edit(request, habit_id, pk):
     action = get_object_or_404(Action, pk=pk)
