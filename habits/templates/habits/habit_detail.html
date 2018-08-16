@@ -1,28 +1,47 @@
-{% extends "habits/index.html" %}
+{% extends "habits/habits.html" %}
 
 {% block main %}
 
-<h1>{{ habit }}</h1>
-<button type="button" class="btn btn-outline-success" type="submit" data-toggle="tooltip" data-placement="right" title="Add an action">
+<a href="{% url 'habit_delete' habit.pk %}" class="btn btn-outline-danger mr-2" style="float:right" role="button" data-toggle="tooltip" data-placement="bottom" id="delete_habit" title="Delete {{ habit }}">
+  <i class="far fa-minus-square"></i>
+</a>
+<a href="{% url 'habit_edit' habit_id=habit_id %}" class="btn btn-outline-info mr-2" style="float:right" role="button" data-toggle="tooltip" data-placement="bottom" title="Edit {{ habit }}">
+  <i class="fas fa-pencil-alt"></i>
+</a>
+<a href="{% url 'action_new' habit_id=habit_id %}" class="btn btn-outline-info mr-2" style="float:right" role="button" data-toggle="tooltip" data-placement="bottom" title="Add an action">
   <i class="far fa-plus-square"></i>
-</button>
-<br/><br/>
-{% for action in action_list %}
-  <button class="btn btn-outline-danger btn-sm" type="button" aria-label="Close">
-    <i class="far fa-minus-square"></i>
-  </button>
-  {{ action }} - {{ action.action_time }}<br/>
-  <ul>
-  {% for t in trigger_list %}
-    {% for at in t.actions.all %}
-      {% if at.id == action.id %}
-        <li>{{ t }}</li>
-      {% endif %}
-    {% endfor %}
-  {% endfor %}
-  </ul>
-{% endfor %}
+</a>
 
-<!-- <input type="submit" style="float:right" value="Add Action" class="btn btn-dark"> -->
+<h2>{{ habit }}</h2>
+
+<table class="table">
+  <tr>
+    <th></th>
+    <th>Actions</th>
+    <th>Triggers</th>
+    <th>Date/Time</th>
+  </tr>
+  {% for action in action_list %}
+  <tr>
+    <td>
+      <a href="{% url 'action_edit' habit_id=habit.id pk=action.pk %}" class="btn btn-outline-info mr-2 btn-sm" role="button" data-toggle="tooltip" data-placement="bottom" title="Edit {{ action }}">
+        <i class="fas fa-pencil-alt"></i>
+      </a>
+      <a href="{% url 'action_delete' pk=action.pk %}" class="btn btn-outline-danger mr-2 btn-sm" role="button" data-toggle="tooltip" data-placement="bottom" title="Delete {{ action }}">
+        <i class="far fa-minus-square"></i>
+      </a>
+    </td>
+    <td>
+      {{ action }}<br/><br/>
+    </td>
+    <td>
+      {% for t in action.triggers.all %}
+      {{ t }},
+      {% endfor %}
+    </td>
+    <td>{{ action.action_time }}</td>
+  </tr>
+  {% endfor %}
+</table>
 
 {% endblock %}

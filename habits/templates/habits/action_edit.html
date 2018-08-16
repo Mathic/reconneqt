@@ -1,0 +1,13 @@
+{% extends "habits/habits.html" %}
+
+{% block main %}
+
+<h2>Habit: {{ habit }}</h2>
+<br/>
+<form method="POST" class="post-form">{% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="save btn btn-outline-info">Save</button>
+  <a href="{% url 'habit_detail' habit_id=habit.pk %}" class="btn btn-outline-info" role="button" data-toggle="tooltip" data-placement="right" title="Go back to {{ habit }} details">Cancel</a>
+</form>
+
+{% endblock %}

@@ -1,45 +1,34 @@
-{% extends "habits/index.html" %}
+{% extends "habits/base_index.html" %}
+
+{% block sidebar %}
+
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li>
+        <a href="{% url 'habit_new' %}" data-toggle="tooltip" data-placement="right" title="Add a habit">
+          <i class="far fa-plus-square m-4" style="float:right"></i>
+        </a>
+      </li>
+      <li class="sidebar-brand">
+        <a href="{% url 'habits' %}">Habits</a>
+      </li>
+      {% for habit in habit_list %}
+      <li>
+        {% if habit.good_habit %}
+          <a href="{% url 'habit_detail' habit.id %}">{{ habit.habit_name }}</a>
+        {% else %}
+          <a href="{% url 'habit_detail' habit.id %}">{{ habit.habit_name }}</a>
+        {% endif %}
+      {% endfor %}
+      </li>
+    </ul>
+</div>
+<!-- /#sidebar-wrapper -->
+<!-- <div id="like_button_container"></div> -->
+
+{% endblock %}
 
 {% block main %}
-
-<!-- <div class="starter-template">
-  <h1>ReconneQt Habits</h1>
-  <p class="lead">Create a new habit and add triggers.</p>
-</div> -->
-
-<table class="table">
-  <tr>
-    <!-- <th>Delete</th> -->
-    <th>Habit</th>
-    <!-- <th>Triggers</th> -->
-  </tr>
-  {% for habit in habit_list %}
-  <tr>
-    <!-- <td></td> -->
-    <td>
-      <button class="btn btn-outline-danger btn-sm" type="button" aria-label="Close">
-        <i class="far fa-minus-square"></i>
-      </button>
-      <a class="btn btn-outline-info" href="{% url 'detail' habit.id %}">{{ habit.habit_name }}</a>
-    </td>
-    <!-- <td>
-      {% for trigger in trigger_list %}
-        {% for h in trigger.habits.all %}
-          {% if h.id == habit.id %}
-            {{ trigger  }}<br/>
-          {% endif %}
-        {% endfor %}
-      {% endfor %}
-    </td> -->
-  </tr>
-  {% endfor %}
-  <tr>
-    <td><button class="btn btn-outline-success" type="submit" data-toggle="tooltip" data-placement="bottom" title="Add a habit">
-      <i class="far fa-plus-square"></i>
-    </button></td>
-  </tr>
-</table>
-
-<div id="like_button_container"></div>
-
+<!-- <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a> -->
 {% endblock %}

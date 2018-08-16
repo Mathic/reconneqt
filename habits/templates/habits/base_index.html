@@ -57,23 +57,30 @@
   </div>
 </nav>
 
-<main role="main" class="container">
-
-  {% block main %}{% endblock %}
-
-</main><!-- /.container -->
+<div id="wrapper" class="toggled">
+  {% block sidebar %}{% endblock %}
+  <div id="page-content-wrapper">
+     <div class="container-fluid">
+         {% block main %}{% endblock %}
+     </div>
+  </div><!-- /#page-content-wrapper -->
+</div><!-- /#wrapper -->
 
 {% endblock %}
 
-
-
 {% block scripts %}
   <script src="{% static 'habits/like_button.js' %}"></script>
+  <script src="{% static 'habits/habit_detail.js' %}"></script>
 
   <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
     $(document).ready(function() {
       $('li.active').removeClass('active');
-      $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
+      $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
     });
 
     $(function () {

@@ -17,6 +17,7 @@ class Habit(models.Model):
 class Action(models.Model):
     action_name = models.CharField(max_length=100)
     habit_action = models.ForeignKey('Habit', on_delete=models.CASCADE)
+    triggers = models.ManyToManyField('Trigger')
     action_time = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -25,7 +26,6 @@ class Action(models.Model):
 
 class Trigger(models.Model):
     trigger_name = models.CharField(max_length=100)
-    actions = models.ManyToManyField('Action')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
