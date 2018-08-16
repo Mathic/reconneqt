@@ -3,9 +3,26 @@
 {% block main %}
 
 <h1>{{ habit }}</h1>
-
-{% for trigger in habit_triggers %}
-  {{ trigger  }}<br/>
+<button type="button" class="btn btn-outline-success" type="submit" data-toggle="tooltip" data-placement="right" title="Add an action">
+  <i class="far fa-plus-square"></i>
+</button>
+<br/><br/>
+{% for action in action_list %}
+  <button class="btn btn-outline-danger btn-sm" type="button" aria-label="Close">
+    <i class="far fa-minus-square"></i>
+  </button>
+  {{ action }} - {{ action.action_time }}<br/>
+  <ul>
+  {% for t in trigger_list %}
+    {% for at in t.actions.all %}
+      {% if at.id == action.id %}
+        <li>{{ t }}</li>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+  </ul>
 {% endfor %}
+
+<!-- <input type="submit" style="float:right" value="Add Action" class="btn btn-dark"> -->
 
 {% endblock %}
