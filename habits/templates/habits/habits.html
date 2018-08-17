@@ -6,11 +6,9 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <li>
-        <span data-toggle="modal">
-          <a id="new-habit-button" data-target="#modal" data-form="{% url 'habit_new' %}" href="#" data-toggle="tooltip" data-placement="right" title="Add a habit">
-            <i class="far fa-plus-square m-4" style="float:right"></i>
-          </a>
-        </span>
+        <a href="{% url 'habit_new' %}" data-toggle="tooltip" data-placement="right" title="Add a habit">
+          <i class="far fa-plus-square m-4" style="float:right"></i>
+        </a>
       </li>
       <li class="sidebar-brand">
         <a href="{% url 'habits' %}">Habits</a>
