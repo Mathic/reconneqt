@@ -5,9 +5,11 @@
 <a href="{% url 'habit_delete' habit.pk %}" class="btn btn-outline-danger mr-2" style="float:right" role="button" data-toggle="tooltip" data-placement="bottom" id="delete_habit" title="Delete {{ habit }}">
   <i class="far fa-minus-square"></i>
 </a>
-<a href="{% url 'habit_edit' habit_id=habit_id %}" class="btn btn-outline-info mr-2" style="float:right" role="button" data-toggle="tooltip" data-placement="bottom" title="Edit {{ habit }}">
-  <i class="fas fa-pencil-alt"></i>
-</a>
+<span data-toggle="modal">
+  <a id="edit-habit-button" data-form="{% url 'habit_edit' pk=habit_id %}" href="#" class="btn btn-outline-info mr-2" style="float:right" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ habit }}">
+    <i class="fas fa-pencil-alt"></i>
+  </a>
+</span>
 <a href="{% url 'action_new' habit_id=habit_id %}" class="btn btn-outline-info mr-2" style="float:right" role="button" data-toggle="tooltip" data-placement="bottom" title="Add an action">
   <i class="far fa-plus-square"></i>
 </a>
