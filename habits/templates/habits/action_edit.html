@@ -1,18 +1,32 @@
-{% extends "habits/habits.html" %}
+{% load static %}
 
-{% block main %}
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <form id="action_edit_form" method="POST" class="post-form">
+      <div class="modal-header">
+        <h3 class="modal-title" id="myModalLabel">
+          {% if action.pk %}
+          Editing {{ action }} in Habit: {{ habit }}
+          {% else %}
+          Create new action in Habit: {{ habit }}
+          {% endif %}
+        </h3>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        {% csrf_token %}
+        {{ form.as_p }}
+      </div>
+      <div class="modal-footer">
+        {% if action.pk %}
+        <button id="action-edit-submit" method="POST" url="{% url 'action_edit' habit_id=habit.id pk=action.pk %}" type="submit" class="save btn btn-outline-info">Save</button>
+        {% else %}
+        <button id="action-edit-submit" method="POST" url="{% url 'action_new' habit_id=habit.id %}" type="submit" class="save btn btn-outline-info">Save</button>
+        {% endif %}
+        <!-- <a href="{% url 'habit_detail' habit_id=habit.pk %}" class="btn btn-outline-info" role="button" data-toggle="tooltip" data-placement="right" title="Go back to {{ habit }} details">Cancel</a> -->
+      </div>
+    </form>
+  </div>
+</div>
 
-{% if action.pk %}
-<h3>Editing {{ action }} in Habit: {{ habit }}</h3>
-{% else %}
-<h3>Create new action in Habit: {{ habit }}</h3>
-{% endif %}
-<br/>
-
-<form method="POST" class="post-form">{% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="save btn btn-outline-info">Save</button>
-  <a href="{% url 'habit_detail' habit_id=habit.pk %}" class="btn btn-outline-info" role="button" data-toggle="tooltip" data-placement="right" title="Go back to {{ habit }} details">Cancel</a>
-</form>
-
-{% endblock %}
+<script src="{% static 'habits/action_edit.js' %}"></script>

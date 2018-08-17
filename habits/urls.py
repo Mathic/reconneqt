@@ -15,5 +15,9 @@ urlpatterns = [
     path('habits/<int:habit_id>/<int:pk>/edit_action', views.action_edit, name='action_edit'),
     path('delete_action/<int:pk>/', views.ActionDelete.as_view(), name='action_delete'),
 
+    path('habits/motives', views.motives, name='motives'),
+    path('habits/new_motive', views.motive_new, name='motive_new'),
+    path('habits/<int:pk>/edit_motive', views.motive_edit, name='motive_edit'),
+
     path('', views.reconneqt, name='reconneqt'),
 ]

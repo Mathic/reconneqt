@@ -1,9 +1,10 @@
 {% extends "habits/base_index.html" %}
 
-{% block sidebar %}
+{% block main %}
 
-<!-- Sidebar -->
-<div id="sidebar-wrapper">
+<div id="wrapper" class="toggled">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <li>
         <span data-toggle="modal">
@@ -25,12 +26,17 @@
       {% endfor %}
       </li>
     </ul>
-</div>
-<!-- /#sidebar-wrapper -->
-<!-- <div id="like_button_container"></div> -->
+  </div><!-- /#sidebar-wrapper -->
+  <div id="page-content-wrapper">
+     <div class="container-fluid">
+       <!-- Modal -->
+       <div class="modal fade" id="edit-modal"></div>
+       <!-- /.modal -->
+       {% block page %}{% endblock %}
+        <!-- <div id="like_button_container"></div> -->
+        <!-- <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a> -->
+    </div>
+  </div><!-- /#page-content-wrapper -->
+</div><!-- /#wrapper -->
 
-{% endblock %}
-
-{% block main %}
-<!-- <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a> -->
 {% endblock %}

@@ -2,7 +2,7 @@ from django import forms
 from django.forms import inlineformset_factory
 from django.forms.widgets import CheckboxSelectMultiple
 
-from .models import Habit, Action, Trigger
+from .models import Habit, Action, Motive
 
 class HabitForm(forms.ModelForm):
 
@@ -15,15 +15,15 @@ class ActionForm(forms.ModelForm):
 
     class Meta:
         model = Action
-        fields = ('action_name', 'triggers')
+        fields = ('action_name', 'motives')
 
     def __init__(self, *args, **kwargs):
         super(ActionForm, self).__init__(*args, **kwargs)
-        self.fields['triggers'].widget = CheckboxSelectMultiple()
-        self.fields['triggers'].queryset = Trigger.objects.all()
+        self.fields['motives'].widget = CheckboxSelectMultiple()
+        self.fields['motives'].queryset = Motive.objects.all()
 
-class TriggerForm(forms.ModelForm):
+class MotiveForm(forms.ModelForm):
 
     class Meta:
-        model = Trigger
-        fields = ('trigger_name',)
+        model = Motive
+        fields = ('motive_name',)

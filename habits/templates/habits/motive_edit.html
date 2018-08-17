@@ -4,7 +4,7 @@
   <div class="modal-content">
     <form id="habit_edit_form" method="POST" class="post-form">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Habit {{ habit }}</h4>
+        <h4 class="modal-title" id="myModalLabel">Motive {{ motive }}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
       <div class="modal-body">
@@ -12,10 +12,10 @@
         {{ form.as_p }}
       </div>
       <div class="modal-footer">
-        {% if habit.pk %}
-        <button id="habit-edit-submit" method="POST" url="{% url 'habit_edit' habit_id=habit.id %}" type="submit" class="save btn btn-outline-info">Save</button>
+        {% if motive.pk %}
+        <button id="habit-edit-submit" method="POST" url="{% url 'motive_edit' pk=pk %}" type="submit" class="save btn btn-outline-info">Save</button>
         {% else %}
-        <button id="habit-edit-submit" method="POST" url="{% url 'habit_new' %}" type="submit" class="save btn btn-outline-info">Save</button>
+        <button id="habit-edit-submit" method="POST" url="{% url 'motive_new' %}" type="submit" class="save btn btn-outline-info">Save</button>
         {% endif %}
       </div>
     </form>

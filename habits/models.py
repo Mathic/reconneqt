@@ -17,19 +17,19 @@ class Habit(models.Model):
 class Action(models.Model):
     action_name = models.CharField(max_length=100)
     habit_action = models.ForeignKey('Habit', on_delete=models.CASCADE)
-    triggers = models.ManyToManyField('Trigger')
+    motives = models.ManyToManyField('Motive')
     action_time = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.action_name
 
-class Trigger(models.Model):
-    trigger_name = models.CharField(max_length=100)
+class Motive(models.Model):
+    motive_name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.trigger_name
+        return self.motive_name
 
     class Meta:
-        ordering = ('trigger_name',)
+        ordering = ('motive_name',)

@@ -35,6 +35,9 @@
         <a class="nav-link" href="{% url 'habits' %}">Habits</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="#">Motives</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="#">Forums</a>
       </li>
       {% endif %}
@@ -57,17 +60,7 @@
   </div>
 </nav>
 
-<div id="wrapper" class="toggled">
-  {% block sidebar %}{% endblock %}
-  <div id="page-content-wrapper">
-     <div class="container-fluid">
-       <!-- Modal -->
-       <div class="modal fade" id="edit-modal"></div>
-       <!-- /.modal -->
-       {% block main %}{% endblock %}
-     </div>
-  </div><!-- /#page-content-wrapper -->
-</div><!-- /#wrapper -->
+{% block main %}{% endblock %}
 
 {% endblock %}
 
