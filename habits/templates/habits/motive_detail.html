@@ -1,0 +1,40 @@
+{% extends "habits/base_index.html" %}
+
+{% block main %}
+<div id="page-content-wrapper">
+  <div class="container-fluid"><span data-toggle="modal">
+      <a id="new-action-button" data-form="" href="#" class="btn btn-outline-info mr-2" style="float:right" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Add a motive">
+        <i class="far fa-plus-square"></i>
+      </a>
+    </span>
+
+    <h3>{{user}}'s motives</h3>
+
+    <table class="table">
+      <tr>
+        <th>Motives</th>
+        <th></th>
+      </tr>
+      {% for motive in motive_list %}
+      <tr>
+        <td>
+          <a href="" class="btn btn-outline-danger mr-2" role="button" data-toggle="tooltip" data-placement="bottom" id="delete_habit" title="Delete {{ motive }}">
+            <i class="far fa-minus-square"></i>
+          </a>
+          <span data-toggle="modal">
+            <a id="edit-habit-button" data-form="" href="#" class="btn btn-outline-info mr-2" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ motive }}">
+              <i class="fas fa-pencil-alt"></i>
+            </a>
+          </span>
+        </td>
+        <td>
+          {{ motive }}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <div id="like_button_container"></div>
+  </div>
+</div>
+
+{% endblock %}

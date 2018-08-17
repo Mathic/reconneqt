@@ -35,6 +35,9 @@
         <a class="nav-link" href="{% url 'habits' %}">Habits</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="#">Motives</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="#">Forums</a>
       </li>
       {% endif %}
@@ -57,34 +60,11 @@
   </div>
 </nav>
 
-<div id="wrapper" class="toggled">
-  {% block sidebar %}{% endblock %}
-  <div id="page-content-wrapper">
-     <div class="container-fluid">
-         {% block main %}{% endblock %}
-     </div>
-  </div><!-- /#page-content-wrapper -->
-</div><!-- /#wrapper -->
+{% block main %}{% endblock %}
 
 {% endblock %}
 
 {% block scripts %}
-  <script src="{% static 'habits/like_button.js' %}"></script>
+  <!-- <script src="{% static 'habits/like_button.js' %}"></script> -->
   <script src="{% static 'habits/habit_detail.js' %}"></script>
-
-  <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-
-    $(document).ready(function() {
-      $('li.active').removeClass('active');
-      $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
-    });
-
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
-  </script>
 {% endblock %}

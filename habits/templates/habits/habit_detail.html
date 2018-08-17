@@ -1,16 +1,22 @@
 {% extends "habits/habits.html" %}
 
-{% block main %}
+{% block page %}
 
 <a href="{% url 'habit_delete' habit.pk %}" class="btn btn-outline-danger mr-2" style="float:right" role="button" data-toggle="tooltip" data-placement="bottom" id="delete_habit" title="Delete {{ habit }}">
   <i class="far fa-minus-square"></i>
 </a>
-<a href="{% url 'habit_edit' habit_id=habit_id %}" class="btn btn-outline-info mr-2" style="float:right" role="button" data-toggle="tooltip" data-placement="bottom" title="Edit {{ habit }}">
-  <i class="fas fa-pencil-alt"></i>
-</a>
-<a href="{% url 'action_new' habit_id=habit_id %}" class="btn btn-outline-info mr-2" style="float:right" role="button" data-toggle="tooltip" data-placement="bottom" title="Add an action">
-  <i class="far fa-plus-square"></i>
-</a>
+
+<span data-toggle="modal">
+  <a id="edit-habit-button" data-form="{% url 'habit_edit' habit_id=habit_id %}" href="#" class="btn btn-outline-info mr-2" style="float:right" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ habit }}">
+    <i class="fas fa-pencil-alt"></i>
+  </a>
+</span>
+
+<span data-toggle="modal">
+  <a id="new-action-button" data-form="{% url 'action_new' habit_id=habit_id %}" href="#" class="btn btn-outline-info mr-2" style="float:right" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Add an action">
+    <i class="far fa-plus-square"></i>
+  </a>
+</span>
 
 <h2>{{ habit }}</h2>
 
@@ -18,15 +24,17 @@
   <tr>
     <th></th>
     <th>Actions</th>
-    <th>Triggers</th>
+    <th>Motives</th>
     <th>Date/Time</th>
   </tr>
   {% for action in action_list %}
   <tr>
     <td>
-      <a href="{% url 'action_edit' habit_id=habit.id pk=action.pk %}" class="btn btn-outline-info mr-2 btn-sm" role="button" data-toggle="tooltip" data-placement="bottom" title="Edit {{ action }}">
-        <i class="fas fa-pencil-alt"></i>
-      </a>
+      <span data-toggle="modal">
+        <a data-form="{% url 'action_edit' habit_id=habit.id pk=action.pk %}" href="#" class="edit-action-button btn btn-outline-info mr-2 btn-sm" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ action }}">
+          <i class="fas fa-pencil-alt"></i>
+        </a>
+      </span>
       <a href="{% url 'action_delete' pk=action.pk %}" class="btn btn-outline-danger mr-2 btn-sm" role="button" data-toggle="tooltip" data-placement="bottom" title="Delete {{ action }}">
         <i class="far fa-minus-square"></i>
       </a>
@@ -35,7 +43,7 @@
       {{ action }}<br/><br/>
     </td>
     <td>
-      {% for t in action.triggers.all %}
+      {% for t in action.motives.all %}
       {{ t }},
       {% endfor %}
     </td>

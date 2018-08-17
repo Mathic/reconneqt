@@ -1,14 +1,17 @@
 {% extends "habits/base_index.html" %}
 
-{% block sidebar %}
+{% block main %}
 
-<!-- Sidebar -->
-<div id="sidebar-wrapper">
+<div id="wrapper" class="toggled">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <li>
-        <a href="{% url 'habit_new' %}" data-toggle="tooltip" data-placement="right" title="Add a habit">
-          <i class="far fa-plus-square m-4" style="float:right"></i>
-        </a>
+        <span data-toggle="modal">
+          <a id="new-habit-button" data-target="#modal" data-form="{% url 'habit_new' %}" href="#" data-toggle="tooltip" data-placement="right" title="Add a habit">
+            <i class="far fa-plus-square m-4" style="float:right"></i>
+          </a>
+        </span>
       </li>
       <li class="sidebar-brand">
         <a href="{% url 'habits' %}">Habits</a>
@@ -23,12 +26,17 @@
       {% endfor %}
       </li>
     </ul>
-</div>
-<!-- /#sidebar-wrapper -->
-<!-- <div id="like_button_container"></div> -->
+  </div><!-- /#sidebar-wrapper -->
+  <div id="page-content-wrapper">
+     <div class="container-fluid">
+       <!-- Modal -->
+       <div class="modal fade" id="edit-modal"></div>
+       <!-- /.modal -->
+       {% block page %}{% endblock %}
+        <!-- <div id="like_button_container"></div> -->
+        <!-- <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a> -->
+    </div>
+  </div><!-- /#page-content-wrapper -->
+</div><!-- /#wrapper -->
 
-{% endblock %}
-
-{% block main %}
-<!-- <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a> -->
 {% endblock %}
