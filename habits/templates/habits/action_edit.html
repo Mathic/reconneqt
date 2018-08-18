@@ -1,5 +1,5 @@
 {% load static %}
-
+{% if not user.is_anonymous %}
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
     <form id="action_edit_form" method="POST" class="post-form">
@@ -28,5 +28,11 @@
     </form>
   </div>
 </div>
-
+{% else %}
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <p>Please login to see this page.</p>
+  </div>
+</div>
+{% endif %}
 <script src="{% static 'habits/action_edit.js' %}"></script>

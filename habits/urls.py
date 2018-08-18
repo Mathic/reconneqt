@@ -5,6 +5,8 @@ from . import views
 urlpatterns = [
     path('home/', views.index, name='index'),
     path('login/', views.login, name='login'),
+    path('signup/', views.signup, name='signup'),
+
     path('habits/', views.habits, name='habits'),
     path('habits/new', views.habit_new, name='habit_new'),
     path('habits/<int:habit_id>/edit', views.habit_edit, name='habit_edit'),
@@ -15,9 +17,14 @@ urlpatterns = [
     path('habits/<int:habit_id>/<int:pk>/edit_action', views.action_edit, name='action_edit'),
     path('delete_action/<int:pk>/', views.ActionDelete.as_view(), name='action_delete'),
 
-    path('habits/motives', views.motives, name='motives'),
-    path('habits/new_motive', views.motive_new, name='motive_new'),
-    path('habits/<int:pk>/edit_motive', views.motive_edit, name='motive_edit'),
+    path('motives/', views.motives, name='motives'),
+    path('motives/new', views.motive_new, name='motive_new'),
+    path('motives/<int:pk>/edit', views.motive_edit, name='motive_edit'),
+    path('delete_motive/<int:pk>/', views.MotiveDelete.as_view(), name='motive_delete'),
 
     path('', views.reconneqt, name='reconneqt'),
+    path('/forum', views.forum, name='forum'),
 ]
+
+handler404 = views.error_404
+handler500 = views.error_500

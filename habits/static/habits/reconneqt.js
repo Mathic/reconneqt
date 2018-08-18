@@ -2,6 +2,16 @@
 $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
+
+    var show = $("#wrapper").hasClass("toggled")
+
+    if(show){
+      $('#left-caret').show()
+      $('#right-caret').hide()
+    }else{
+      $('#left-caret').hide()
+      $('#right-caret').show()
+    }
 });
 
 // Nav bar set active button
@@ -47,6 +57,26 @@ $('#new-action-button').click(function(ev){
 
 // Modal edit action button
 $('.edit-action-button').click(function(ev){
+  ev.preventDefault();
+  var url = $(this).data("form");
+  $('#edit-modal').load(url, function(){
+    $(this).modal('show');
+  });
+  return false;
+});
+
+// Modal new motive button
+$('#new-motive-button').click(function(ev){
+  ev.preventDefault();
+  var url = $(this).data("form");
+  $('#edit-modal').load(url, function(){
+    $(this).modal('show');
+  });
+  return false;
+});
+
+// Modal edit motive button
+$('.edit-motive-button').click(function(ev){
   ev.preventDefault();
   var url = $(this).data("form");
   $('#edit-modal').load(url, function(){

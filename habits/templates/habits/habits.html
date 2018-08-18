@@ -1,8 +1,8 @@
 {% extends "habits/base_index.html" %}
 
 {% block main %}
-
-<div id="wrapper" class="toggled">
+{% if not user.is_anonymous %}
+<div id="wrapper" class="">
   <!-- Sidebar -->
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
@@ -28,15 +28,26 @@
     </ul>
   </div><!-- /#sidebar-wrapper -->
   <div id="page-content-wrapper">
-     <div class="container-fluid">
-       <!-- Modal -->
-       <div class="modal fade" id="edit-modal"></div>
-       <!-- /.modal -->
-       {% block page %}{% endblock %}
-        <!-- <div id="like_button_container"></div> -->
-        <!-- <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a> -->
+    <a href="#menu-toggle" class="btn btn-outline-secondary" id="menu-toggle" style="width: 35px">
+      <i id="left-caret" class="fas fa-chevron-left" style="display: none"></i>
+      <i id="right-caret" class="fas fa-chevron-right"></i>
+    </a>
+    <div class="container-fluid">
+    <!-- Modal -->
+    <div class="modal fade" id="edit-modal"></div>
+    <!-- /.modal -->
+    <!-- <div id="like_button_container"></div> -->
+    <!-- <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a> -->
     </div>
   </div><!-- /#page-content-wrapper -->
 </div><!-- /#wrapper -->
+
+{% else %}
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <p>Please login to see this page.</p>
+  </div>
+</div>
+{% endif %}
 
 {% endblock %}

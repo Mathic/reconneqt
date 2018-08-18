@@ -22,7 +22,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
       </li>
-      {% if user.is_authenticated %}
+      {% if not user.is_anonymous %}
       <!-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Graphs</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -35,20 +35,20 @@
         <a class="nav-link" href="{% url 'habits' %}">Habits</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Motives</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Forums</a>
+        <a class="nav-link" href="{% url 'motives' %}">Motives</a>
       </li>
       {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'forum' %}">Forums</a>
+      </li>
     </ul>
     <ul class="navbar-nav">
-      {% if user.is_authenticated %}
+      {% if not user.is_anonymous %}
       <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle float-right" href="http://example.com" id="userdropdown"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.get_username }}</a>
           <div class="dropdown-menu" aria-labelledby="userdropdown">
-            <a class="dropdown-item" href="{% url 'logout'%}?next={{request.path}}">Logout</a>
+            <a class="dropdown-item" href="{% url 'logout'%}?next={% url 'reconneqt' %}">Logout</a>
           </div>
       </li>
       {% else %}
@@ -66,5 +66,5 @@
 
 {% block scripts %}
   <!-- <script src="{% static 'habits/like_button.js' %}"></script> -->
-  <script src="{% static 'habits/habit_detail.js' %}"></script>
+  <script src="{% static 'habits/reconneqt.js' %}"></script>
 {% endblock %}

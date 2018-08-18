@@ -1,15 +1,19 @@
 {% extends "habits/base_index.html" %}
+{% load staticfiles %}
 
 {% block main %}
+<!-- Modal -->
+<div class="modal fade" id="edit-modal"></div>
+<!-- /.modal -->
+
 <div id="page-content-wrapper">
   <div class="container-fluid"><span data-toggle="modal">
-      <a id="new-action-button" data-form="" href="#" class="btn btn-outline-info mr-2" style="float:right" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Add a motive">
+    {% if user.is_authenticated %}
+      <a id="new-motive-button" data-form="{% url 'motive_new' %}" href="#" class="btn btn-outline-info mr-2" style="float:right" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Add a motive">
         <i class="far fa-plus-square"></i>
       </a>
     </span>
-
     <h3>{{user}}'s motives</h3>
-
     <table class="table">
       <tr>
         <th>Motives</th>
@@ -17,15 +21,15 @@
       </tr>
       {% for motive in motive_list %}
       <tr>
-        <td>
-          <a href="" class="btn btn-outline-danger mr-2" role="button" data-toggle="tooltip" data-placement="bottom" id="delete_habit" title="Delete {{ motive }}">
-            <i class="far fa-minus-square"></i>
-          </a>
+        <td class="fit">
           <span data-toggle="modal">
-            <a id="edit-habit-button" data-form="" href="#" class="btn btn-outline-info mr-2" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ motive }}">
+            <a data-form="{% url 'motive_edit' pk=motive.id %}" href="#" class="edit-motive-button btn btn-outline-info mr-2 btn-sm" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ motive }}">
               <i class="fas fa-pencil-alt"></i>
             </a>
           </span>
+          <a href="{% url 'motive_delete' pk=motive.pk %}" class="btn btn-outline-danger mr-2 btn-sm" role="button" data-toggle="tooltip" data-placement="bottom" id="delete_habit" title="Delete {{ motive }}">
+            <i class="far fa-minus-square"></i>
+          </a>
         </td>
         <td>
           {{ motive }}
@@ -34,6 +38,9 @@
       {% endfor %}
     </table>
     <div id="like_button_container"></div>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
   </div>
 </div>
 

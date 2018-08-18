@@ -1,5 +1,5 @@
 // Modal edit habit form
-$('#habit-edit-submit').click(function(ev) {
+$('#motive-edit-submit').click(function(ev) {
   ev.preventDefault();
   var form = $(this).closest("form");
 

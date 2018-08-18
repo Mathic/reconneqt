@@ -1,16 +1,23 @@
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from django.forms import inlineformset_factory
+
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
+
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic.edit import DeleteView
 
-from .forms import HabitForm, ActionForm
+from .forms import HabitForm, ActionForm, MotiveForm
 from .models import Habit, Action, Motive
 
 # Create your views here.
 def reconneqt(request):
     return render(request, 'habits/cover.html')
+
+def forum(request):
+    return render(request, 'habits/forums.html')
 
 def index(request):
     return render(request, 'habits/index.html')
@@ -18,17 +25,34 @@ def index(request):
 def login(request):
     return render(request, 'habits/login.html')
 
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'habits/signup.html', {'form': form})
+
 def habits(request):
     try:
-        user_id = int(request.user.id)
-        habit_list = Habit.objects.filter(user_id=user_id)
-        action_list = Action.objects.filter(user_id=user_id)
-        motive_list = Motive.objects.filter(user_id=user_id)
-        context = {
-            'habit_list': habit_list,
-            'action_list': action_list,
-            'motive_list': motive_list
-        }
+        if request.user.is_authenticated:
+            user_id = int(request.user.id)
+            habit_list = Habit.objects.filter(user_id=user_id)
+            action_list = Action.objects.filter(user_id=user_id)
+            motive_list = Motive.objects.filter(user_id=user_id)
+            context = {
+                'habit_list': habit_list,
+                'action_list': action_list,
+                'motive_list': motive_list
+            }
+        else:
+            context = {}
     except User.DoesNotExist:
         raise Http404("User does not exist")
     return render(request, 'habits/habits.html', context)
@@ -68,17 +92,21 @@ class HabitDelete(DeleteView):
 
 def habit_detail(request, habit_id):
     try:
-        user_id = int(request.user.id)
-        habit = Habit.objects.get(pk=habit_id)
-        action_list = Action.objects.filter(habit_action=habit_id)
-        motive_list = Motive.objects.filter(user_id=user_id)
-
-        context = {
-            'habit_id': habit_id,
-            'habit': habit,
-            'action_list': action_list,
-            'motive_list': motive_list
-        }
+        if request.user.is_authenticated:
+            user_id = int(request.user.id)
+            habit_list = Habit.objects.filter(user_id=user_id)
+            habit = Habit.objects.get(pk=habit_id)
+            action_list = Action.objects.filter(user_id=user_id).filter(habit_action=habit_id).order_by('-action_time')
+            motive_list = Motive.objects.filter(user_id=user_id)
+            context = {
+                'habit_id': habit_id,
+                'habit': habit,
+                'habit_list': habit_list,
+                'action_list': action_list,
+                'motive_list': motive_list
+            }
+        else:
+            context = {}
     except Habit.DoesNotExist:
         raise Http404("Habit does not exist")
     return render(request, 'habits/habit_detail.html', context)
@@ -132,40 +160,55 @@ class ActionDelete(DeleteView):
 
 def motives(request):
     try:
-        user_id = int(request.user.id)
-        motive_list = Motive.objects.filter(user_id=user_id)
-        context = {
-            'motive_list': motive_list
-        }
+        if request.user.is_authenticated:
+            user_id = int(request.user.id)
+            motive_list = Motive.objects.filter(user_id=user_id)
+            context = {
+                'motive_list': motive_list
+            }
+        else:
+            context = {}
     except User.DoesNotExist:
         raise Http404("User does not exist")
     return render(request, 'habits/motive_detail.html', context)
 
 def motive_new(request):
     if request.method == "POST":
-        form = HabitForm(request.POST)
+        form = MotiveForm(request.POST)
         if form.is_valid():
-            habit = form.save(commit=False)
-            habit.user = request.user
-            habit.save()
-            return redirect('habit_detail', habit_id=habit.pk)
+            motive = form.save(commit=False)
+            motive.user = request.user
+            motive.save()
+            return redirect('motives')
     else:
-        form = HabitForm()
-        return render(request, 'habits/habit_edit.html', {'form': form})
+        form = MotiveForm()
+        return render(request, 'habits/motive_edit.html', {'form': form})
 
-def motive_edit(request, habit_id):
-    habit = get_object_or_404(Habit, pk=habit_id)
+def motive_edit(request, pk):
+    motive = get_object_or_404(Motive, pk=pk)
     if request.method == "POST":
-        form = HabitForm(request.POST, instance=habit)
+        form = MotiveForm(request.POST, instance=habit)
         if form.is_valid():
-            habit = form.save(commit=False)
-            habit.user = request.user
-            habit.save()
-            return redirect('habit_detail', habit_id=habit_id)
+            motive = form.save(commit=False)
+            motive.user = request.user
+            motive.save()
+            return redirect('motives')
     else:
-        form = HabitForm(instance=habit)
+        form = MotiveForm(instance=motive)
     context = {
         'form': form,
-        'habit': habit
+        'motive': motive
     }
-    return render(request, 'habits/habit_edit.html', context)
+    return render(request, 'habits/motive_edit.html', context)
+
+class MotiveDelete(DeleteView):
+    model = Motive
+    success_url = reverse_lazy('motives')
+
+def error_404(request):
+    data = {}
+    return render(request, 'habits/error_404.html', data)
+
+def error_500(request):
+    data = {}
+    return render(request, 'habits/error_500.html', data)
