@@ -45,6 +45,16 @@ $('#edit-habit-button').click(function(ev){
   return false;
 });
 
+// Modal new habit button
+$('#delete-habit-button').click(function(ev){
+  ev.preventDefault();
+  var url = $(this).data("form");
+  $('#edit-modal').load(url, function(){
+    $(this).modal('show');
+  });
+  return false;
+});
+
 // Modal new action button
 $('#new-action-button').click(function(ev){
   ev.preventDefault();

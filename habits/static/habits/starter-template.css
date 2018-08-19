@@ -1,6 +1,7 @@
 body {
   padding-top: 3.5rem;
   overflow-x: hidden;
+  background: #e8edf3;
 }
 .starter-template {
   padding: 3rem 1.5rem;
@@ -11,6 +12,42 @@ body {
 .table th.fit {
     white-space: nowrap;
     width: 1%;
+}
+
+.sm-circle{
+  width:50px;
+  height:50px;
+  border-radius:50px;
+  font-size:12px;
+  color:#000;
+  line-height:45px;
+  text-align:center;
+  border:3px solid #e6cf8b;
+  display:inline-block;
+}
+
+.md-circle{
+  width:75px;
+  height:75px;
+  border-radius:45px;
+  font-size:1rem;
+  color:#b56969;
+  line-height:65px;
+  text-align:center;
+  border:3px solid #b56969;
+  display:inline-block;
+}
+
+.lg-circle{
+  width:100px;
+  height:100px;
+  border-radius:50px;
+  font-size:1rem;
+  color:#22264b;
+  line-height:100px;
+  text-align:center;
+  border:3px solid #22264b;
+  display:inline-block;
 }
 
 #wrapper {

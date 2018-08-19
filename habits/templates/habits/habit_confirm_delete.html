@@ -1,7 +1,20 @@
-{% extends "habits/habits.html" %}
-{% block main %}
-<form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
-</form>
-{% endblock %}
+{% load static %}
+
+<div class="modal-dialog modal-lg">
+  <form method="post">{% csrf_token %}
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Delete habit: {{ habit }} - {{ habit.id }}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="habit-delete-submit" method="POST" url="{% url 'habit_delete' pk=habit.id %}" type="submit" class="save btn btn-outline-info">Confirm</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="{% static 'habits/habit_delete.js' %}"></script>
