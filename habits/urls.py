@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    path('home/', views.index, name='index'),
+    path('', views.index, name='index'),
     path('login/', views.login, name='login'),
     path('signup/', views.signup, name='signup'),
 
@@ -22,7 +22,7 @@ urlpatterns = [
     path('motives/<int:pk>/edit/', views.motive_edit, name='motive_edit'),
     path('delete_motive/<int:pk>/', views.MotiveDelete.as_view(), name='motive_delete'),
 
-    path('', views.reconneqt, name='reconneqt'),
+    # path('', views.reconneqt, name='reconneqt'),
     path('forum/', views.forum, name='forum'),
 ]
 

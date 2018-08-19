@@ -11,9 +11,6 @@ from ..forms import HabitForm
 from ..models import Habit, Action
 
 # Create your views here.
-def reconneqt(request):
-    return render(request, 'habits/cover.html')
-
 def index(request):
     return render(request, 'habits/index.html')
 
@@ -80,7 +77,7 @@ def habit_detail(request, habit_id):
                         occurence[m] += 1
                     else:
                         occurence[m] = 1
-                        
+
             context = {
                 'habit_id': habit_id,
                 'habit': habit,
