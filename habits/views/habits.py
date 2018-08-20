@@ -1,4 +1,5 @@
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
@@ -14,20 +15,7 @@ from ..models import Habit, Action
 def index(request):
     return render(request, 'habits/index.html')
 
-def habits(request):
-    try:
-        if request.user.is_authenticated:
-            user_id = int(request.user.id)
-            habit_list = Habit.objects.filter(user_id=user_id)
-            context = {
-                'habit_list': habit_list,
-            }
-        else:
-            context = {}
-    except User.DoesNotExist:
-        raise Http404("User does not exist")
-    return render(request, 'habits/habits.html', context)
-
+@login_required
 def habit_new(request):
     if request.method == "POST":
         form = HabitForm(request.POST)
@@ -40,6 +28,7 @@ def habit_new(request):
         form = HabitForm()
         return render(request, 'habits/habit_edit.html', {'form': form})
 
+@login_required
 def habit_edit(request, habit_id):
     habit = get_object_or_404(Habit, pk=habit_id)
     if request.method == "POST":
@@ -61,33 +50,31 @@ class HabitDelete(DeleteView):
     model = Habit
     success_url = reverse_lazy('habits')
 
+@login_required
 def habit_detail(request, habit_id):
     try:
-        if request.user.is_authenticated:
-            user_id = int(request.user.id)
-            habit_list = Habit.objects.filter(user_id=user_id)
-            habit = Habit.objects.get(pk=habit_id)
-            action_list = Action.objects.filter(user_id=user_id).filter(habit_action=habit_id).order_by('-action_time')
-            occurence = {}
-            num_motives = 0
-            for a in action_list:
-                for m in a.motives.all():
-                    num_motives += 1
-                    if m in occurence:
-                        occurence[m] += 1
-                    else:
-                        occurence[m] = 1
+        user_id = int(request.user.id)
+        habit_list = Habit.objects.filter(user_id=user_id)
+        habit = Habit.objects.get(pk=habit_id)
+        action_list = Action.objects.filter(user_id=user_id).filter(habit_action=habit_id).order_by('-action_time')
+        occurence = {}
+        num_motives = 0
+        for a in action_list:
+            for m in a.motives.all():
+                num_motives += 1
+                if m in occurence:
+                    occurence[m] += 1
+                else:
+                    occurence[m] = 1
 
-            context = {
-                'habit_id': habit_id,
-                'habit': habit,
-                'habit_list': habit_list,
-                'action_list': action_list,
-                'num_motives': num_motives,
-                'occurence': occurence
-            }
-        else:
-            context = {}
+        context = {
+            'habit_id': habit_id,
+            'habit': habit,
+            'habit_list': habit_list,
+            'action_list': action_list,
+            'num_motives': num_motives,
+            'occurence': occurence
+        }
     except Habit.DoesNotExist:
         raise Http404("Habit does not exist")
     return render(request, 'habits/habit_detail.html', context)

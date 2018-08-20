@@ -24,6 +24,7 @@ body {
   width: 100%;
   padding-top: 1rem;
   padding-bottom: 80px;
+  background: #F2F2F4;
 }
 
 body.fixed-nav #content-wrapper {
@@ -132,7 +133,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 
 .sidebar {
   width: 90px !important;
-  background-color: #212529;
+  background-color: #353535;
   min-height: calc(100vh - 56px);
 }
 
@@ -350,7 +351,7 @@ footer.sticky-footer {
   bottom: 0;
   width: calc(100% - 90px);
   height: 80px;
-  background-color: #e9ecef;
+  background-color: #fff;
 }
 
 footer.sticky-footer .copyright {

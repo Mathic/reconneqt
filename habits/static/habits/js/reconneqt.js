@@ -95,6 +95,34 @@ $('.edit-motive-button').click(function(ev){
   return false;
 });
 
+// date picker?
+$('#sandbox-container .input-group.date').datepicker({
+});
+
+$('input.datepicker').datepicker().datepicker("setDate", new Date());
+
+$('#date-today').click(function(ev){
+  $('input.datepicker').datepicker().datepicker("setDate", new Date());
+});
+
+$('input.datepicker').change(function(){
+  $.ajax({
+    type: $(this).attr('method'),
+    url: $(this).attr('url'),
+    data: {
+      date: $("#date").val().replace('//g', '-'),
+      csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+    },
+    context: this,
+    success: function(data, status) {
+      $("#occurences").empty();
+      $("#occurences").append($(data).find('#occurences').html());
+      $("#progress-table").empty();
+      $("#progress-table").append($(data).find('#progress-table').html());
+    }
+  });
+});
+
 // var form_options = {
 //   target: '#modal',
 //   success: function() {  }

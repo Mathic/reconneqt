@@ -18,10 +18,58 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
+    <link href="{% static 'habits/css/landing-page.css' %}" rel="stylesheet">
+    <link href="{% static 'habits/css/bootstrap-datepicker3.min.css' %}" rel="stylesheet">
     {% block css %}{% endblock %}
   </head>
 
   <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-light static-top">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">ReconneQt</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            {% if not user.is_anonymous %}
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Graphs</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item" href="#">Something</a>
+                <a class="dropdown-item" href="#">Some more</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'progress' %}">Habits</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'forum' %}">Forums</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            {% if not user.is_anonymous %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle float-right" href="http://example.com" id="userdropdown"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.get_username }}</a>
+                <div class="dropdown-menu" aria-labelledby="userdropdown">
+                  <a class="dropdown-item" href="{% url 'logout'%}?next={% url 'index' %}">Logout</a>
+                </div>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}?next={{request.path}}">Login</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
 
     {% block content %}{% endblock %}
 
@@ -55,6 +103,8 @@
       src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
       crossorigin>
     </script>
+
+    <script src="{% static 'habits/js/bootstrap-datepicker.min.js' %}"></script>
 
     <!-- Load our React component. -->
     {% block scripts %}{% endblock %}
