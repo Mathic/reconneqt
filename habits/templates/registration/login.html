@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<div class="row justify-content-md-center">
+<div class="row justify-content-md-center" style="background: #F2F2F4">
   <div class="col-sm-4">
     {% if form.errors %}
       <p>Your username and password didn't match. Please try again.</p>
@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<div class="row justify-content-md-center">
+<div class="row justify-content-md-center" style="background: #F2F2F4">
   <div class="col-sm-4">
     <form method="post" action="{% url 'login' %}">
       {% csrf_token %}
@@ -47,7 +47,7 @@
   </div>
 </div>
 
-<div class="row justify-content-md-center">
+<div class="row justify-content-md-center" style="background: #F2F2F4">
   <div class="col-sm-4">
     {# Assumes you setup the password_reset view in your URLconf #}
     <p><a class="btn btn-outline-secondary m-2" href="{% url 'signup' %}">Create user</a></p>
