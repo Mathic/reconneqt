@@ -1,0 +1,83 @@
+{% extends 'habits/base_template.html' %}
+{% load forum_filters %}
+
+{% block content %}
+
+<!-- Masthead -->
+<header class="masthead-forums text-white text-center">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-9 mx-auto">
+        <h1 class="mb-5">Ask and answer questions on how to make or break habits.</h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container-fluid">
+  {% for s in parents %}
+    <table class="table">
+      <tr>
+        <th>{{ s }}</th>
+        <th>Topics</th>
+        <th>Posts</th>
+        <th>Latest</th>
+      </tr>
+      {% for c in children %}
+      {% if c.parent == s %}
+      <tr>
+        <td>
+          <a href="{% url 'threads' subject=c.pk %}">{{ c }}</a>
+        </td>
+        <td>
+          {{ c.threads.count }}
+        </td>
+        <td>
+          {{ c.threads.all|get_num_posts }}
+        </td>
+        <td>
+
+        </td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </table>
+  {% endfor %}
+</div>
+
+<section class="features-icons bg-light text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="fas fa-paint-roller m-auto text-primary"></i>
+          </div>
+          <h3>Forums</h3>
+          <p class="lead mb-0">Under construction!</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="far fa-comments m-auto text-primary"></i>
+          </div>
+          <h3>Chat</h3>
+          <p class="lead mb-0">with others and get motivated!</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="fas fa-chalkboard-teacher m-auto text-primary"></i>
+          </div>
+          <h3>Learn</h3>
+          <p class="lead mb-0">Read and write guides for improvement!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

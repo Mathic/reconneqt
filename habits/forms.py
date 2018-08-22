@@ -27,3 +27,6 @@ class MotiveForm(forms.ModelForm):
     class Meta:
         model = Motive
         fields = ('motive_name',)
+
+class ProgressForm(forms.Form):
+    date = forms.DateField()
