@@ -28,7 +28,7 @@
       {% if c.parent == s %}
       <tr>
         <td>
-          {{ c }}
+          <a href="{% url 'threads' subject=c.pk %}">{{ c }}</a>
         </td>
         <td>
           {{ c.threads.count }}

@@ -48,7 +48,7 @@ def habit_edit(request, habit_id):
 
 class HabitDelete(DeleteView):
     model = Habit
-    success_url = reverse_lazy('habits')
+    success_url = reverse_lazy('progress')
 
 @login_required
 def habit_detail(request, habit_id):

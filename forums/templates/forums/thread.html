@@ -1,7 +1,13 @@
 {% extends 'habits/base_template.html' %}
 
 {% block content %}
-
-Test
-
+<div class="container-fluid">
+{% if threads.count == 0 %}
+  Nothing to display
+{% else %}
+{% for t in threads %}
+  {{ t }}
+{% endfor %}
+{% endif %}
+</div>
 {% endblock %}
