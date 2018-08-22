@@ -31,6 +31,7 @@ DEBUG = True
 
 INSTALLED_APPS = [
     'habits.apps.HabitsConfig',
+    'forums.apps.ForumsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

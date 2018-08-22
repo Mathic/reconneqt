@@ -22,7 +22,6 @@ urlpatterns = [
     path('delete_motive/<int:pk>/', views.MotiveDelete.as_view(), name='motive_delete'),
 
     path('progress/', views.progress, name='progress'),
-    path('forum/', views.forum, name='forum'),
 ]
 
 handler404 = views.error_404

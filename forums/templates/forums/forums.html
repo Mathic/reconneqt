@@ -1,9 +1,10 @@
 {% extends 'habits/base_template.html' %}
+{% load forum_filters %}
 
 {% block content %}
 
 <!-- Masthead -->
-<header class="masthead text-white text-center">
+<header class="masthead-forums text-white text-center">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
@@ -13,6 +14,37 @@
     </div>
   </div>
 </header>
+
+<div class="container-fluid">
+  {% for s in parents %}
+    <table class="table">
+      <tr>
+        <th>{{ s }}</th>
+        <th>Topics</th>
+        <th>Posts</th>
+        <th>Latest</th>
+      </tr>
+      {% for c in children %}
+      {% if c.parent == s %}
+      <tr>
+        <td>
+          {{ c }}
+        </td>
+        <td>
+          {{ c.threads.count }}
+        </td>
+        <td>
+          {{ c.threads.all|get_num_posts }}
+        </td>
+        <td>
+
+        </td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </table>
+  {% endfor %}
+</div>
 
 <section class="features-icons bg-light text-center">
   <div class="container">
@@ -47,4 +79,5 @@
     </div>
   </div>
 </section>
+
 {% endblock %}

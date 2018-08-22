@@ -21,6 +21,18 @@ header.masthead .overlay {
   opacity: 0.3;
 }
 
+header.masthead-forums {
+  position: relative;
+  background-color: #343a40;
+  background: url("../img/alphabets-ancient-box-529926.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
 header.masthead h1 {
   font-size: 2rem;
 }
