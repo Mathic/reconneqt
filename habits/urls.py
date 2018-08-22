@@ -3,11 +3,10 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    path('home/', views.index, name='index'),
+    path('', views.index, name='index'),
     path('login/', views.login, name='login'),
     path('signup/', views.signup, name='signup'),
 
-    path('habits/', views.habits, name='habits'),
     path('habits/new/', views.habit_new, name='habit_new'),
     path('habits/<int:habit_id>/edit/', views.habit_edit, name='habit_edit'),
     path('habits/<int:habit_id>/', views.habit_detail, name='habit_detail'),
@@ -22,8 +21,7 @@ urlpatterns = [
     path('motives/<int:pk>/edit/', views.motive_edit, name='motive_edit'),
     path('delete_motive/<int:pk>/', views.MotiveDelete.as_view(), name='motive_delete'),
 
-    path('', views.reconneqt, name='reconneqt'),
-    path('forum/', views.forum, name='forum'),
+    path('progress/', views.progress, name='progress'),
 ]
 
 handler404 = views.error_404

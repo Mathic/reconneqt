@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
@@ -10,6 +11,7 @@ from django.views.generic.edit import DeleteView
 from ..forms import ActionForm
 from ..models import Habit, Action
 
+@login_required
 def action_new(request, habit_id):
     habit = Habit.objects.get(pk=habit_id)
     if request.method == "POST":
@@ -30,6 +32,7 @@ def action_new(request, habit_id):
     }
     return render(request, 'habits/action_edit.html', context)
 
+@login_required
 def action_edit(request, habit_id, pk):
     action = get_object_or_404(Action, pk=pk)
     habit = Habit.objects.get(pk=habit_id)
