@@ -16,24 +16,33 @@ def forum(request):
         raise Http404("Subject does not exist")
     return render(request, 'forums/forums.html', context)
 
-def threads(request, subject):
+def threads(request, s_id):
     try:
-        threads = Thread.objects.filter(subject_fk__id=subject)
-        # posts = Post.objects.filter(thread_fk=threads)
+        parents = Subject.objects.filter(parent=None)
+        children = Subject.objects.exclude(parent=None)
+        subject = Subject.objects.get(pk=s_id)
+        threads = Thread.objects.filter(subject_fk__id=s_id)
 
         context = {
+            'parents': parents,
+            'children': children,
+            'subject': subject,
             'threads': threads
         }
     except Thread.DoesNotExist:
         raise Http404("Thread does not exist")
-    return render(request, 'forums/thread.html', context)
+    return render(request, 'forums/subject.html', context)
 
 def thread_detail(request, pk):
     try:
+        parents = Subject.objects.filter(parent=None)
+        children = Subject.objects.exclude(parent=None)
         thread = Thread.objects.get(pk=pk)
         posts = Post.objects.filter(thread_fk=thread)
 
         context = {
+            'parents': parents,
+            'children': children,
             'thread': thread,
             'posts': posts
         }

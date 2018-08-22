@@ -1,51 +1,14 @@
-{% extends 'habits/base_template.html' %}
-{% load forum_filters %}
+{% extends 'forums/base_forums.html' %}
 
-{% block content %}
+{% block breadcrumbs %}
+<p align="center">F O R U M S</p>
+{% endblock %}
 
-<!-- Masthead -->
-<header class="masthead-forums text-white text-center">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-xl-9 mx-auto">
-        <h1 class="mb-5">Ask and answer questions on how to make or break habits.</h1>
-      </div>
-    </div>
-  </div>
-</header>
+{% block threads %}
 
-<div class="container-fluid">
-  {% for s in parents %}
-    <table class="table">
-      <tr>
-        <th>{{ s }}</th>
-        <th>Topics</th>
-        <th>Posts</th>
-        <th>Latest</th>
-      </tr>
-      {% for c in children %}
-      {% if c.parent == s %}
-      <tr>
-        <td>
-          <a href="{% url 'threads' subject=c.pk %}">{{ c }}</a>
-        </td>
-        <td>
-          {{ c.threads.count }}
-        </td>
-        <td>
-          {{ c.threads.all|get_num_posts }}
-        </td>
-        <td>
+{% endblock %}
 
-        </td>
-      </tr>
-      {% endif %}
-      {% endfor %}
-    </table>
-  {% endfor %}
-</div>
-
+{% block section %}
 <section class="features-icons bg-light text-center">
   <div class="container">
     <div class="row">
@@ -79,5 +42,4 @@
     </div>
   </div>
 </section>
-
 {% endblock %}

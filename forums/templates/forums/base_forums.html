@@ -1,0 +1,60 @@
+{% extends 'habits/base_template.html' %}
+{% load static %}
+{% load forum_filters %}
+
+{% block css %}
+  <link href="{% static 'habits/css/forums.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<!-- Masthead -->
+<header class="masthead-forums text-white text-center">
+  <div class="overlay"></div>
+</header>
+
+<div class="middlenav">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8">
+        {% block breadcrumbs %}{% endblock %}
+      </div>
+      <div class="col-lg-4 col-md-4">
+        <button class="btn btn-secondary m-2">
+          Create new thread
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="content-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8">
+        {% block threads %}{% endblock %}
+      </div>
+      <div class="col-lg-4 col-md-4">
+        {% for s in parents %}
+        <div class="sidebarblock">
+          <h3>{{ s }}</h3>
+          <div class="divline"></div>
+          <div class="blocktxt">
+            <ul class="cats">
+              {% for c in children %}
+                {% if c.parent == s %}
+                  <li><a href="{% url 'threads' s_id=c.pk %}">{{ c }}<span class="badge pull-right">{{ c.threads.count }}</span></a></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% block section %}{% endblock %}
+
+{% endblock %}

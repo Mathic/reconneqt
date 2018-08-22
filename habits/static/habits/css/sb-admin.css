@@ -24,7 +24,7 @@ body {
   width: 100%;
   padding-top: 1rem;
   padding-bottom: 80px;
-  background: #F2F2F4;
+  background: #ecf0f1;
 }
 
 body.fixed-nav #content-wrapper {

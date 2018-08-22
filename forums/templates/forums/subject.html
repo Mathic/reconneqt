@@ -1,0 +1,54 @@
+{% extends 'forums/base_forums.html' %}
+
+{% block breadcrumbs %}
+
+<p class="breadcrumbs" align="center">
+  {% if subject.parent != None %}
+    <a href="{% url 'forum' %}">Forums</a> -> <a href="{% url 'threads' s_id=subject.parent.pk %}">{{ subject.parent }}</a> -> {{ subject }}
+  {% else %}
+    <a href="{% url 'forum' %}">Forums</a> -> {{ subject }}
+  {% endif %}
+</p>
+
+{% endblock %}
+
+{% block threads %}
+  {% if subject.parent != None %}
+    {% if threads.count == 0 %}
+      No topics to display
+    {% else %}
+    {% for t in threads %}
+      <div class="thread p-2">
+        <div class="thread-title pull-left">
+          <a href="{% url 'thread_detail' pk=t.pk %}">{{ t }}</a>
+        </div>
+        <div class="thread-info pull-left">
+          <div class="post-count">
+            <div class="post-countbg">
+              {{ t.posts.count }}
+              <div class="triangle"></div>
+            </div>
+          </div>
+          <div class="view-count">
+            <i class="fa fa-eye"></i>
+            1,100
+          </div>
+          <div class="latest">
+            <i class="far fa-clock"></i>
+            latest
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    {% endfor %}
+    {% endif %}
+  {% else %}
+    {% for c in subject.children.all %}
+    <div class="thread p-2">
+      <div class="thread-title pl-3 pt-1">
+        <a href="{% url 'threads' s_id=c.pk %}">{{ c }}</a><br/>
+      </div>
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endblock %}
