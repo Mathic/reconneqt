@@ -28,7 +28,11 @@
             <div class="clearfix"></div>
           </div>
           <div class="post-info">
-            <div class="posted pull-left"><i class="far fa-clock"></i> Posted on : {{ p.post_created }}</div>
+            {% if p.post_edited != None %}
+              <div class="posted pull-left"><i class="far fa-clock"></i> Edited on : {{ p.post_edited }}</div>
+            {% else %}
+              <div class="posted pull-left"><i class="far fa-clock"></i> Posted on : {{ p.post_created }}</div>
+            {% endif %}
             <div class="next pull-right">
               <a href="#"><i class="fa fa-share"></i></a>
               <a href="#"><i class="fa fa-flag"></i></a>
@@ -47,7 +51,11 @@
             </p>
           </div>
           <div class="post-info">
-            <div class="posted pull-left"><i class="far fa-clock"></i> Posted on : {{ p.post_created }}</div>
+            {% if p.post_edited != None %}
+              <div class="posted pull-left"><i class="far fa-clock"></i> Edited on : {{ p.post_edited }}</div>
+            {% else %}
+              <div class="posted pull-left"><i class="far fa-clock"></i> Posted on : {{ p.post_created }}</div>
+            {% endif %}
             <div class="next pull-right">
               <a href="#"><i class="fa fa-share"></i></a>
               <a href="#"><i class="fa fa-flag"></i></a>

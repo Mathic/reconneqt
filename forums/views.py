@@ -38,7 +38,7 @@ def thread_detail(request, pk):
         parents = Subject.objects.filter(parent=None)
         children = Subject.objects.exclude(parent=None)
         thread = Thread.objects.get(pk=pk)
-        posts = Post.objects.filter(thread_fk=thread)
+        posts = Post.objects.filter(thread_fk=thread).order_by('post_created')
 
         context = {
             'parents': parents,
