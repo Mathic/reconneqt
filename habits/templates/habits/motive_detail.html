@@ -2,7 +2,7 @@
 
 {% block dynamic_menu %}
   {% for habit in habit_list %}
-  <li class="nav-item">
+  <li class="nav-item" style="margin-left: 0.5em">
     {% if habit.good_habit %}
     <a href="{% url 'habit_detail' habit.id %}" class="nav-link">
       <i class="far fa-thumbs-up"></i>
@@ -26,28 +26,27 @@
   </a>
 </span>
 <h3>{{user}}'s motives</h3>
-<table class="table">
-  <tr>
-    <th>Motives</th>
-    <th></th>
-  </tr>
+
+<div class="row container-fluid">
   {% for motive in motive_list %}
-  <tr>
-    <td class="fit">
+  <div class="motive col-lg-2 col-md-2 col-sm-2 col-xs-2">
+    <div class="motive-title">
+      {{ motive }}
+    </div>
+    <div class="motive-buttons">
       <span data-toggle="modal">
-        <a data-form="{% url 'motive_edit' pk=motive.id %}" href="#" class="edit-motive-button btn btn-outline-info mr-2 btn-sm" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ motive }}">
+        <a data-form="{% url 'motive_edit' pk=motive.id %}" href="#" class="edit-motive-button btn btn-sm" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ motive }}">
           <i class="fas fa-pencil-alt"></i>
         </a>
       </span>
-      <a href="{% url 'motive_delete' pk=motive.pk %}" class="btn btn-outline-danger mr-2 btn-sm" role="button" data-toggle="tooltip" data-placement="bottom" id="delete_habit" title="Delete {{ motive }}">
-        <i class="far fa-minus-square"></i>
-      </a>
-    </td>
-    <td>
-      {{ motive }}
-    </td>
-  </tr>
-  {% endfor %}
-</table>
 
+      <span data-toggle="modal">
+        <a data-form="{% url 'motive_delete' pk=motive.pk %}" href="#" class="btn btn-sm delete-motive-button" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" id="delete-motive-button" title="Delete {{ motive }}">
+          <i class="far fa-minus-square"></i>
+        </a>
+      </span>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}

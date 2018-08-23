@@ -44,7 +44,7 @@ header.masthead-forums h1 {
 }
 
 .middlenav {
-  height: 70px;
+  height: auto;
   border-bottom: 1px solid #c9cccd;
   padding: 10px;
   font-size: 14px;

@@ -58,4 +58,4 @@ def action_edit(request, habit_id, pk):
 
 class ActionDelete(DeleteView):
     model = Action
-    success_url = reverse_lazy('habits')
+    success_url = reverse_lazy('progress')

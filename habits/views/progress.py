@@ -17,7 +17,7 @@ def progress(request):
             form = ProgressForm(request.POST)
             if form.is_valid():
                 date = form.cleaned_data.get('date')
-                action_list = Action.objects.filter(user_id=user_id).filter(action_time__date=date)
+                action_list = Action.objects.filter(user_id=user_id).filter(action_time__date=date).order_by('action_time')
         else:
             form = ProgressForm()
             print(datetime.today())

@@ -45,7 +45,7 @@ $('#edit-habit-button').click(function(ev){
   return false;
 });
 
-// Modal new habit button
+// Modal delete habit button
 $('#delete-habit-button').click(function(ev){
   ev.preventDefault();
   var url = $(this).data("form");
@@ -87,6 +87,26 @@ $('#new-motive-button').click(function(ev){
 
 // Modal edit motive button
 $('.edit-motive-button').click(function(ev){
+  ev.preventDefault();
+  var url = $(this).data("form");
+  $('#edit-modal').load(url, function(){
+    $(this).modal('show');
+  });
+  return false;
+});
+
+// Modal delete motive button
+$('.delete-motive-button').click(function(ev){
+  ev.preventDefault();
+  var url = $(this).data("form");
+  $('#edit-modal').load(url, function(){
+    $(this).modal('show');
+  });
+  return false;
+});
+
+// Modal delete motive button
+$('.delete-action-button').click(function(ev){
   ev.preventDefault();
   var url = $(this).data("form");
   $('#edit-modal').load(url, function(){

@@ -1,7 +1,38 @@
-{% extends "habits/habits.html" %}
-{% block main %}
-<form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
-</form>
-{% endblock %}
+<div class="modal-dialog modal-lg">
+  <form method="post">{% csrf_token %}
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Delete action: {{ action }} - {{ action.pk }}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="action-delete-submit" method="POST" url="{% url 'action_delete' pk=action.pk %}" type="submit" class="save btn btn-outline-info">Confirm</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+
+// Modal delete action form
+$('#action-delete-submit').click(function(ev) {
+  ev.preventDefault();
+  var form = $(this).closest("form");
+  console.log('hello')
+  $.ajax({
+    type: $(this).attr('method'),
+    url: $(this).attr('url'),
+    data: form.serialize(),
+    context: this,
+    success: function(data, status) {
+      console.log('hello')
+      $('#edit-modal').modal('toggle');
+      window.location = window.location.href;
+    }
+  });
+});
+
+</script>

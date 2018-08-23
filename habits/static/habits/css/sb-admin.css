@@ -90,8 +90,8 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   width: 100%;
 }
 
-.navbar-nav .nav-item.active .nav-link {
-  /* color: #fff; */
+#wrapper .navbar-nav .nav-item.active .nav-link {
+  color: #fff;
 }
 
 .navbar-nav .nav-item.dropdown .dropdown-toggle::after {
@@ -135,6 +135,10 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   width: 90px !important;
   background-color: #353535;
   min-height: calc(100vh - 56px);
+}
+
+.sidebar ul li {
+  border-bottom: 1px solid #fff !important;
 }
 
 .sidebar .nav-item:last-child {

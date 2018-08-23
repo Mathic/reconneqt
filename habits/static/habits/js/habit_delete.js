@@ -1,4 +1,4 @@
-// Modal edit habit form
+// Modal delete habit form
 $('#habit-delete-submit').click(function(ev) {
   ev.preventDefault();
   var form = $(this).closest("form");
