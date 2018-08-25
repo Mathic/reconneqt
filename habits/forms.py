@@ -10,12 +10,16 @@ class HabitForm(forms.ModelForm):
         model = Habit
         fields = ('habit_name', 'good_habit')
 
-
 class ActionForm(forms.ModelForm):
 
     class Meta:
         model = Action
-        fields = ('action_name', 'motives')
+        fields = ('action_name', 'motives', 'action_start', 'action_end')
+
+        widgets = {
+            'action_start': forms.DateTimeInput(attrs={'class': 'datetime-input'}),
+            'action_end': forms.DateTimeInput(attrs={'class': 'datetime-input'})
+        }
 
     def __init__(self, *args, **kwargs):
         super(ActionForm, self).__init__(*args, **kwargs)

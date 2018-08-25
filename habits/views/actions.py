@@ -8,6 +8,8 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic.edit import DeleteView
 
+import datetime
+
 from ..forms import ActionForm
 from ..models import Habit, Action
 
@@ -15,11 +17,10 @@ from ..models import Habit, Action
 def action_new(request, habit_id):
     habit = Habit.objects.get(pk=habit_id)
     if request.method == "POST":
-        form = ActionForm(request.POST)
+        form = ActionForm(data=request.POST)
         if form.is_valid():
             action = form.save(commit=False)
-            action.habit_action = habit
-            action.action_time = timezone.now()
+            action.habit = habit
             action.user = request.user
             action.save()
             form.save_m2m()
@@ -37,11 +38,10 @@ def action_edit(request, habit_id, pk):
     action = get_object_or_404(Action, pk=pk)
     habit = Habit.objects.get(pk=habit_id)
     if request.method == "POST":
-        form = ActionForm(request.POST, instance=action)
+        form = ActionForm(data=request.POST, instance=action)
         if form.is_valid():
             action = form.save(commit=False)
-            action.habit_action = habit
-            action.action_time = timezone.now()
+            action.habit = habit
             action.user = request.user
             action.save()
             form.save_m2m()

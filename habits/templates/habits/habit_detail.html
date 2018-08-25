@@ -32,11 +32,15 @@
   </div>
 
   <div class="row habit-menu">
-    <div class="habit-title col-lg-8 col-md-8 col-sm-4">
+    <div class="habit-title col-lg-3 col-md-3 col-sm-4">
       <h2>{{ habit }}</h2>
     </div>
 
-    <div class="habit-buttons col-lg-4 col-md-4">
+    <div class="actions-pagination col-lg-7 col-md-7">
+      pagination will go here
+    </div>
+
+    <div class="habit-buttons col-lg-2 col-md-2">
       <span data-toggle="modal">
         <a id="new-action-button" data-form="{% url 'action_new' habit_id=habit_id %}" href="#" class="btn btn-outline-info btn-sm m-2" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Add an action">
           <i class="far fa-plus-square"></i>
@@ -73,7 +77,7 @@
         </div>
         <div class="action-bottom">
           <div class="action-date pull-left">
-            <i class="far fa-clock"></i> {{ action.action_time }}
+            <i class="far fa-clock"></i> {{ action.action_start }} {{ action.action_start|get_duration:action.action_end }}
           </div>
           <div class="action-buttons pull-right">
             <span data-toggle="modal">

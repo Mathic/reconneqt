@@ -17,11 +17,11 @@ def progress(request):
             form = ProgressForm(request.POST)
             if form.is_valid():
                 date = form.cleaned_data.get('date')
-                action_list = Action.objects.filter(user_id=user_id).filter(action_time__date=date).order_by('action_time')
+                action_list = Action.objects.filter(user_id=user_id).filter(action_start__date=date).order_by('action_start')
         else:
             form = ProgressForm()
             print(datetime.today())
-            action_list = Action.objects.filter(action_time__date=datetime.today())
+            action_list = Action.objects.filter(action_start__date=datetime.today())
     except User.DoesNotExist:
         raise Http404("User does not exist")
 

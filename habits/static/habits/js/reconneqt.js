@@ -116,14 +116,20 @@ $('.delete-action-button').click(function(ev){
 });
 
 // date picker?
-$('#sandbox-container .input-group.date').datepicker({
+$('#date').datetimepicker({
+  defaultDate: new Date(),
+	timepicker:false,
+	format:'m/d/Y',
+  todayButton: true,
+  prevButton: true,
+  nextButton: true,
+  defaultSelect: true,
+	maxDate:'+1970/01/01', // and tommorow is maximum date calendar
 });
 
-$('input.datepicker').datepicker().datepicker("setDate", new Date());
+var date = new Date()
 
-$('#date-today').click(function(ev){
-  $('input.datepicker').datepicker().datepicker("setDate", new Date());
-});
+$('#date').val((date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear())
 
 $('input.datepicker').change(function(){
   $.ajax({

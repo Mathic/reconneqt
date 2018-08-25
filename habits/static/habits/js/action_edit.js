@@ -14,3 +14,10 @@ $('#action-edit-submit').click(function(ev) {
     }
   });
 });
+
+$(function () {
+  $('.datetime-input').datetimepicker({
+    format: 'Y-m-d H:i:s',
+    step: 5
+  });
+});

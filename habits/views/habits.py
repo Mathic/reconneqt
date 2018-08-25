@@ -56,7 +56,7 @@ def habit_detail(request, habit_id):
         user_id = int(request.user.id)
         habit_list = Habit.objects.filter(user_id=user_id)
         habit = Habit.objects.get(pk=habit_id)
-        action_list = Action.objects.filter(user_id=user_id).filter(habit_action=habit_id).order_by('-action_time')
+        action_list = Action.objects.filter(user_id=user_id).filter(habit=habit_id).order_by('-action_start')
         occurence = {}
         num_motives = 0
         for a in action_list:

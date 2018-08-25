@@ -16,9 +16,10 @@ class Habit(models.Model):
 
 class Action(models.Model):
     action_name = models.CharField(max_length=100)
-    habit_action = models.ForeignKey('Habit', on_delete=models.CASCADE)
+    habit = models.ForeignKey('Habit', on_delete=models.CASCADE)
     motives = models.ManyToManyField('Motive')
-    action_time = models.DateTimeField(auto_now_add=True)
+    action_start = models.DateTimeField(blank=True, null=True, auto_now_add=False)
+    action_end = models.DateTimeField(blank=True, null=True, auto_now_add=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

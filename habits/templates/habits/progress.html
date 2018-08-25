@@ -24,11 +24,6 @@
 <div class="container-fluid">
   <div class="span5 col-lg-6 col-md-7" id="sandbox-container">
     <div class="input-group">
-      <div class="input-group-prepend" data-toggle="tooltip" data-placement="bottom" title="Today">
-        <span id="date-today" class="input-group-text btn btn-outline-info">
-          <i class="far fa-calendar"></i>
-        </span>
-      </div>
       <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
@@ -65,10 +60,10 @@
           </div>
           <div class="action-bottom">
             <div class="action-date pull-left">
-              <i class="far fa-clock"></i> {{ action.action_time }}
+              <i class="far fa-clock"></i> {{ action.action_start }} {{ action.action_start|get_duration:action.action_end }}
             </div>
             <div class="action-date pull-right">
-              {{ action.habit_action }}
+              {{ action.habit }}
             </div>
             <div class="clearfix"></div>
           </div>
