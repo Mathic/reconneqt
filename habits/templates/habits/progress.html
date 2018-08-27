@@ -26,6 +26,10 @@
   </div>
 
   <div class="row">
+    <div id="graph-container" class="col-lg-5 mb-3">
+      <canvas id="motive-chart"></canvas>
+    </div>
+
     <div id="progress-table" class="col-lg-5 pull-right">
       {% for action in action_list %}
         <div class="action">
@@ -51,10 +55,6 @@
           </div>
         </div>
       {% endfor %}
-    </div>
-
-    <div id="graph-container" class="col-lg-5">
-      <canvas id="motive-chart"></canvas>
     </div>
   </div>
 </div>

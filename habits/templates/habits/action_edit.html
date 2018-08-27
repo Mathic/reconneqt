@@ -21,7 +21,7 @@
         {% if action.pk %}
         <button id="action-edit-submit" method="POST" url="{% url 'action_edit' habit_id=habit.id pk=action.pk %}" type="submit" class="save btn btn-outline-info">Save</button>
         {% else %}
-        <button id="action-edit-submit" method="POST" url="{% url 'action_new' habit_id=habit.id %}" type="submit" class="save btn btn-outline-info">Save</button>
+        <button id="action-edit-submit" method="POST" url="{% url 'action_new' habit_id=habit.id %}" type="submit" class="save btn btn-primary">Save</button>
         {% endif %}
         <!-- <a href="{% url 'habit_detail' habit_id=habit.pk %}" class="btn btn-outline-info" role="button" data-toggle="tooltip" data-placement="right" title="Go back to {{ habit }} details">Cancel</a> -->
       </div>

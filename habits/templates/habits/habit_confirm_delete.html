@@ -11,7 +11,7 @@
         <p>Are you sure you want to delete "{{ object }}"?</p>
       </div>
       <div class="modal-footer">
-        <button id="habit-delete-submit" method="POST" url="{% url 'habit_delete' pk=habit.id %}" type="submit" class="save btn btn-outline-info">Confirm</button>
+        <button id="habit-delete-submit" method="POST" url="{% url 'habit_delete' pk=habit.id %}" type="submit" class="save btn btn-primary">Confirm</button>
       </div>
     </div>
   </form>

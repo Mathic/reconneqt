@@ -13,9 +13,9 @@
       </div>
       <div class="modal-footer">
         {% if habit.pk %}
-        <button id="habit-edit-submit" method="POST" url="{% url 'habit_edit' habit_id=habit.id %}" type="submit" class="save btn btn-outline-info">Save</button>
+        <button id="habit-edit-submit" method="POST" url="{% url 'habit_edit' habit_id=habit.id %}" type="submit" class="save btn btn-primary">Save</button>
         {% else %}
-        <button id="habit-edit-submit" method="POST" url="{% url 'habit_new' %}" type="submit" class="save btn btn-outline-info">Save</button>
+        <button id="habit-edit-submit" method="POST" url="{% url 'habit_new' %}" type="submit" class="save btn btn-primary">Save</button>
         {% endif %}
       </div>
     </form>

@@ -43,7 +43,12 @@
             <ul class="cats">
               {% for c in children %}
                 {% if c.parent == s %}
-                  <li><a href="{% url 'threads' s_id=c.pk %}">{{ c }}<span class="badge pull-right">{{ c.threads.count }}</span></a></li>
+                  <li>
+                    <a href="{% url 'threads' s_id=c.pk %}">
+                      {{ c }}
+                      <span class="badge badge-primary badge-pill pull-right">{{ c.threads.count }}</span>
+                    </a>
+                  </li>
                 {% endif %}
               {% endfor %}
             </ul>

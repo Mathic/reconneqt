@@ -2,8 +2,11 @@
 
 {% block breadcrumbs %}
 
-<p class="breadcrumbs" align="center">
-  <a href="{% url 'forum' %}">Forums</a> -> <a href="{% url 'threads' s_id=thread.subject_fk.parent.pk %}">{{ thread.subject_fk.parent }}</a> -> <a href="{% url 'threads' s_id=thread.subject_fk.pk %}">{{ thread.subject_fk }}</a> -> {{ thread }}
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{% url 'forum' %}">Forums</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'threads' s_id=thread.subject_fk.parent.pk %}">{{ thread.subject_fk.parent }}</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'threads' s_id=thread.subject_fk.pk %}">{{ thread.subject_fk }}</a></li>
+  <li class="breadcrumb-item active">{{ thread }}</li>
 </p>
 
 {% endblock %}

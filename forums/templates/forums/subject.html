@@ -2,13 +2,16 @@
 
 {% block breadcrumbs %}
 
-<p class="breadcrumbs" align="center">
+<ol class="breadcrumb">
   {% if subject.parent != None %}
-    <a href="{% url 'forum' %}">Forums</a> -> <a href="{% url 'threads' s_id=subject.parent.pk %}">{{ subject.parent }}</a> -> {{ subject }}
+    <li class="breadcrumb-item"><a href="{% url 'forum' %}">Forums</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'threads' s_id=subject.parent.pk %}">{{ subject.parent }}</a></li>
+    <li class="breadcrumb-item active">{{ subject }}</li>
   {% else %}
-    <a href="{% url 'forum' %}">Forums</a> -> {{ subject }}
+    <li class="breadcrumb-item"><a href="{% url 'forum' %}">Forums</a></li>
+    <li class="breadcrumb-item active">{{ subject }}</li>
   {% endif %}
-</p>
+</ol>
 
 {% endblock %}
 
