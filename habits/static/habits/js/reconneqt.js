@@ -115,40 +115,6 @@ $('.delete-action-button').click(function(ev){
   return false;
 });
 
-// date picker?
-$('#date').datetimepicker({
-  defaultDate: new Date(),
-	timepicker:false,
-	format:'m/d/Y',
-  todayButton: true,
-  prevButton: true,
-  nextButton: true,
-  defaultSelect: true,
-	maxDate:'+1970/01/01', // and tommorow is maximum date calendar
-});
-
-var date = new Date()
-
-$('#date').val((date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear())
-
-$('input.datepicker').change(function(){
-  $.ajax({
-    type: $(this).attr('method'),
-    url: $(this).attr('url'),
-    data: {
-      date: $("#date").val().replace('//g', '-'),
-      csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
-    },
-    context: this,
-    success: function(data, status) {
-      $("#occurences").empty();
-      $("#occurences").append($(data).find('#occurences').html());
-      $("#progress-table").empty();
-      $("#progress-table").append($(data).find('#progress-table').html());
-    }
-  });
-});
-
 // var form_options = {
 //   target: '#modal',
 //   success: function() {  }

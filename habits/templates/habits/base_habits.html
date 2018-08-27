@@ -40,7 +40,21 @@
           <span>Habits</span>
         </a>
       </li>
-      {% block dynamic_menu %}{% endblock %}
+      {% for habit in habit_list %}
+      <li class="nav-item" style="margin-left: 0.5em">
+        {% if habit.good_habit %}
+        <a href="{% url 'habit_detail' habit.id %}" class="nav-link">
+          <i class="far fa-thumbs-up"></i>
+          <span>{{ habit.habit_name }}</span>
+        </a>
+        {% else %}
+        <a href="{% url 'habit_detail' habit.id %}" class="nav-link">
+          <i class="far fa-thumbs-down"></i>
+          <span>{{ habit.habit_name }}</span>
+        </a>
+        {% endif %}
+      </li>
+      {% endfor %}
     </ul>
 
     <div id="content-wrapper">
@@ -71,5 +85,7 @@
 
 {% block scripts %}
   <!-- <script src="{% static 'habits/like_button.js' %}"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   <script src="{% static 'habits/js/reconneqt.js' %}"></script>
+  {% block extrajs %}{% endblock %}
 {% endblock %}

@@ -17,6 +17,7 @@ django-heroku = "*"
 gunicorn = "*"
 django-widget-tweaks = "*"
 humanfriendly = "*"
+djangorestframework = "*"
 
 [dev-packages]
 
