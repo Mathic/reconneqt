@@ -8,9 +8,9 @@ def get_occurence(value, total):
     percentage = (value / total) * 100
     # print(percentage)
     if percentage <= 25:
-        return "light"
-    elif percentage > 65:
         return "info"
+    elif percentage > 65:
+        return "warning"
     else:
         return "dark"
 
