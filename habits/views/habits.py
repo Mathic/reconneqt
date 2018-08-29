@@ -2,6 +2,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 
 from django.urls import reverse_lazy
@@ -57,6 +59,11 @@ def habit_detail(request, habit_id):
         habit_list = Habit.objects.filter(user_id=user_id)
         habit = Habit.objects.get(pk=habit_id)
         action_list = Action.objects.filter(user_id=user_id).filter(habit=habit_id).order_by('-action_start')
+
+        paginator = Paginator(action_list, 8) # Show 8 actions per page
+        page = request.GET.get('page')
+        actions = paginator.get_page(page)
+
         occurence = {}
         num_motives = 0
         for a in action_list:
@@ -68,15 +75,19 @@ def habit_detail(request, habit_id):
                     occurence[m] = 1
 
         context = {
-            'habit_id': habit_id,
             'habit': habit,
             'habit_list': habit_list,
-            'action_list': action_list,
             'num_motives': num_motives,
-            'occurence': occurence
+            'occurence': occurence,
+            'actions': actions,
+            'paginator': paginator,
         }
     except Habit.DoesNotExist:
         raise Http404("Habit does not exist")
+    except PageNotAnInteger:
+        actions = paginator.page(1)
+    except EmptyPage:
+        actions = paginator.page(paginator.num_pages)
     return render(request, 'habits/habit_detail.html', context)
 
 def error_404(request):

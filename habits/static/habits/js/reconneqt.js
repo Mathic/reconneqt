@@ -16,7 +16,7 @@ $("#menu-toggle").click(function(e) {
 
 // Nav bar set active button
 $(document).ready(function() {
-  $('li.active').removeClass('active');
+  $('li.active.nav-item').removeClass('active');
   $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
 });
 

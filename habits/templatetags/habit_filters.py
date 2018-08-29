@@ -8,11 +8,11 @@ def get_occurence(value, total):
     percentage = (value / total) * 100
     # print(percentage)
     if percentage <= 25:
-        return "sm"
+        return "light"
     elif percentage > 65:
-        return "lg"
+        return "info"
     else:
-        return "md"
+        return "dark"
 
 @register.filter(name='get_duration')
 def get_duration(start, end):

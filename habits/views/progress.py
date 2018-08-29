@@ -78,11 +78,9 @@ class Progress(APIView):
                     occurence[m.motive_name] += 1
                 else:
                     occurence[m.motive_name] = 1
-
-        print("date: {} occurence: {}\n".format(date, occurence))
+                    
         data = {
             'labels': occurence.keys(),
             'default': occurence.values(),
-            'action_list':  serializers.serialize('json', action_list),
         }
         return Response(data)

@@ -7,7 +7,7 @@
 <div id="habit-details" class="container-fluid">
   <div id="occurences" class="container-fluid">
     {% for key, value in occurence.items %}
-    <div class="{{ value|get_occurence:num_motives }}-circle">{{ key }}</div>
+    <span class="badge badge-pill badge-{{ value|get_occurence:num_motives }}">{{ key }}</span>
     {% endfor %}
   </div>
 
@@ -18,40 +18,48 @@
 
     <div class="actions-pagination col-lg-6 col-md-4">
       <ul class="pagination">
-        <li class="page-item disabled">
-          <a class="page-link" href="#">&laquo;</a>
-        </li>
-        <li class="page-item active">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">4</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">5</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">&raquo;</a>
-        </li>
+        {% if actions.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ actions.previous_page_number }}">&laquo;</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#">&laquo;</a>
+          </li>
+        {% endif %}
+        {% for page in actions.paginator.page_range %}
+          {% if actions.number == page %}
+            <li class="page-item active">
+              <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+        {% if actions.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ actions.next_page_number }}">&raquo;</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#">&raquo;</a>
+          </li>
+        {% endif %}
       </ul>
     </div>
 
     <div class="habit-buttons col-lg-3 col-md-5 btn-toolbar justify-content-between">
       <div class="btn-group">
         <span data-toggle="modal">
-          <a id="new-action-button" data-form="{% url 'action_new' habit_id=habit_id %}" href="#" class="btn btn-primary btn-sm m-2" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Add an action">
+          <a id="new-action-button" data-form="{% url 'action_new' habit_id=habit.id %}" href="#" class="btn btn-primary btn-sm m-2" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Add an action">
             <i class="far fa-plus-square"></i>
           </a>
         </span>
 
         <span data-toggle="modal">
-          <a id="edit-habit-button" data-form="{% url 'habit_edit' habit_id=habit_id %}" href="#" class="btn btn-primary btn-sm m-2" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ habit }}">
+          <a id="edit-habit-button" data-form="{% url 'habit_edit' habit_id=habit.id %}" href="#" class="btn btn-primary btn-sm m-2" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ habit }}">
             <i class="fas fa-pencil-alt"></i>
           </a>
         </span>
@@ -67,21 +75,9 @@
   </div>
 
   <div class="row">
-    {% for action in action_list %}
+    {% for action in actions %}
       <div class="card mr-3 mb-3" style="width: 20rem;">
-        <h3 class="card-header">
-          <span data-toggle="modal">
-            <a data-form="{% url 'action_edit' habit_id=habit.id pk=action.pk %}" href="#" class="edit-action-button btn btn-sm pull-right" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ action|truncatewords:"4" }}">
-              <i class="fas fa-pencil-alt"></i>
-            </a>
-          </span>
-
-          <span data-toggle="modal">
-            <a data-form="{% url 'action_delete' pk=action.pk %}" href="#" class="btn btn-sm delete-action-button  pull-right" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" id="delete-action-button" title="Delete {{ action|truncatewords:"4" }}">
-              <i class="far fa-minus-square"></i>
-            </a>
-          </span>
-        </h3>
+        
         <div class="card-body">
           Action: {{ action }}
         </div>
@@ -98,6 +94,18 @@
         </ul>
         <div class="card-footer text-muted">
           <i class="far fa-clock"></i> {{ action.action_start }}
+
+          <span data-toggle="modal">
+            <a data-form="{% url 'action_edit' habit_id=habit.id pk=action.pk %}" href="#" class="edit-action-button btn btn-sm pull-right" style="padding: 0.5rem;" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ action|truncatewords:"4" }}">
+              <i class="fas fa-pencil-alt"></i>
+            </a>
+          </span>
+
+          <span data-toggle="modal">
+            <a data-form="{% url 'action_delete' pk=action.pk %}" href="#" class="btn btn-sm delete-action-button  pull-right" style="padding: 0.5rem;" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" id="delete-action-button" title="Delete {{ action|truncatewords:"4" }}">
+              <i class="far fa-minus-square"></i>
+            </a>
+          </span>
         </div>
       </div>
     {% endfor %}
