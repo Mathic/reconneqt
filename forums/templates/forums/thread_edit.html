@@ -1,0 +1,18 @@
+{% extends 'forums/base_forums.html' %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{% url 'forum' %}">Forums</a></li>
+</ol>
+{% endblock %}
+
+{% block threads %}
+<div class="thread p-2">
+  <h3>Creating new thread</h3>
+  <form method="post">{% csrf_token %}
+      {{ form.as_p }}
+      {{ form2.as_p }}
+      <input class="btn btn-primary" type="submit" value="Save">
+  </form>
+</div>
+{% endblock %}

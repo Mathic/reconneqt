@@ -4,7 +4,6 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item"><a href="{% url 'forum' %}">Forums</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'threads' s_id=thread.subject_fk.parent.pk %}">{{ thread.subject_fk.parent }}</a></li>
   <li class="breadcrumb-item"><a href="{% url 'threads' s_id=thread.subject_fk.pk %}">{{ thread.subject_fk }}</a></li>
   <li class="breadcrumb-item active">{{ thread }}</li>
 </p>
@@ -12,61 +11,58 @@
 {% endblock %}
 
 {% block threads %}
+  <div class="thread">
+    <div class="posttop p-2">
+      <div class="userinfo pull-left">
+        {{ post.user }}
+      </div>
+      <div class="thread-title pull-left">
+        {{ thread }}
+        <p class="post">
+          {{ post }}
+        </p>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="post-info">
+      {% if post.post_edited != None %}
+        <div class="posted pull-left"><i class="far fa-clock"></i> Edited on : {{ post.post_edited }}</div>
+      {% else %}
+        <div class="posted pull-left"><i class="far fa-clock"></i> Posted on : {{ post.post_created }}</div>
+      {% endif %}
+      <div class="next pull-right">
+        <a href="{% url 'post_new' pk=thread.id %}"><i class="fa fa-reply"></i></a>
+        <a href="#"><i class="fa fa-flag"></i></a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
   {% if posts.count == 0 %}
-    Nothing to display
+    No replies
   {% else %}
     {% for p in posts %}
-      {% if p.original %}
-        <div class="thread">
-          <div class="posttop p-2">
-            <div class="userinfo pull-left">
-              {{ p.user }}
-            </div>
-            <div class="thread-title pull-left">
-              {{ thread }}
-              <p class="post">
-                {{ p }}
-              </p>
-            </div>
-            <div class="clearfix"></div>
+      <div class="thread ml-5">
+        <div class="posttop p-2">
+          <div class="userinfo pull-left">
+            {{ p.user }}
           </div>
-          <div class="post-info">
-            {% if p.post_edited != None %}
-              <div class="posted pull-left"><i class="far fa-clock"></i> Edited on : {{ p.post_edited }}</div>
-            {% else %}
-              <div class="posted pull-left"><i class="far fa-clock"></i> Posted on : {{ p.post_created }}</div>
-            {% endif %}
-            <div class="next pull-right">
-              <a href="#"><i class="fa fa-share"></i></a>
-              <a href="#"><i class="fa fa-flag"></i></a>
-            </div>
-            <div class="clearfix"></div>
-          </div>
+          <p class="post">
+            {{ p }}
+          </p>
         </div>
-      {% else %}
-        <div class="thread ml-5">
-          <div class="posttop p-2">
-            <div class="userinfo pull-left">
-              {{ p.user }}
-            </div>
-            <p class="post">
-              {{ p }}
-            </p>
+        <div class="post-info">
+          {% if p.post_edited != None %}
+            <div class="posted pull-left"><i class="far fa-clock"></i> Edited on : {{ p.post_edited }}</div>
+          {% else %}
+            <div class="posted pull-left"><i class="far fa-clock"></i> Posted on : {{ p.post_created }}</div>
+          {% endif %}
+          <div class="next pull-right">
+            <a href="#"><i class="fa fa-reply"></i></a>
+            <a href="#"><i class="fa fa-flag"></i></a>
           </div>
-          <div class="post-info">
-            {% if p.post_edited != None %}
-              <div class="posted pull-left"><i class="far fa-clock"></i> Edited on : {{ p.post_edited }}</div>
-            {% else %}
-              <div class="posted pull-left"><i class="far fa-clock"></i> Posted on : {{ p.post_created }}</div>
-            {% endif %}
-            <div class="next pull-right">
-              <a href="#"><i class="fa fa-share"></i></a>
-              <a href="#"><i class="fa fa-flag"></i></a>
-            </div>
-            <div class="clearfix"></div>
-          </div>
+          <div class="clearfix"></div>
         </div>
-      {% endif %}
+      </div>
     {% endfor %}
   {% endif %}
 {% endblock %}

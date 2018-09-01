@@ -5,7 +5,6 @@
 <ol class="breadcrumb">
   {% if subject.parent != None %}
     <li class="breadcrumb-item"><a href="{% url 'forum' %}">Forums</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'threads' s_id=subject.parent.pk %}">{{ subject.parent }}</a></li>
     <li class="breadcrumb-item active">{{ subject }}</li>
   {% else %}
     <li class="breadcrumb-item"><a href="{% url 'forum' %}">Forums</a></li>
@@ -16,6 +15,40 @@
 {% endblock %}
 
 {% block threads %}
+<div class="actions-pagination">
+  <ul class="pagination">
+    {% if threads.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ actions.previous_page_number }}">&laquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">&laquo;</a>
+      </li>
+    {% endif %}
+    {% for page in threads.paginator.page_range %}
+      {% if threads.number == page %}
+        <li class="page-item active">
+          <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+        </li>
+      {% else %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% if threads.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ actions.next_page_number }}">&raquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">&raquo;</a>
+      </li>
+    {% endif %}
+  </ul>
+</div>
+
   {% if subject.parent != None %}
     {% if threads.count == 0 %}
       No topics to display

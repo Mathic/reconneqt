@@ -1,0 +1,45 @@
+{% extends 'forums/base_forums.html' %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{% url 'forum' %}">Forums</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'threads' s_id=thread.subject_fk.pk %}">{{ thread.subject_fk }}</a></li>
+  <li class="breadcrumb-item active">{{ thread }}</li>
+</ol>
+{% endblock %}
+
+{% block threads %}
+<div class="thread p-2">
+  <h3>Replying to thread</h3>
+  <div class="posttop p-2">
+    <div class="userinfo pull-left">
+      {{ post.user }}
+    </div>
+    <div class="thread-title pull-left">
+      {{ thread }}
+      <p class="post">
+        {{ post }}
+      </p>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="post-info">
+    {% if post.post_edited != None %}
+      <div class="posted pull-left"><i class="far fa-clock"></i> Edited on : {{ post.post_edited }}</div>
+    {% else %}
+      <div class="posted pull-left"><i class="far fa-clock"></i> Posted on : {{ post.post_created }}</div>
+    {% endif %}
+    <div class="next pull-right">
+      <a href="{% url 'thread_detail' pk=thread.id %}"><span class="badge badge-pill badge-primary">Go back <i class="fas fa-arrow-left"></i></span></a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<div class="thread p-2">
+  <form method="post">{% csrf_token %}
+      {{ form.as_p }}
+      <input class="btn btn-primary" type="submit" value="Save">
+  </form>
+</div>
+{% endblock %}

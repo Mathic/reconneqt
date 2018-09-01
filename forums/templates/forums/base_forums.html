@@ -20,9 +20,9 @@
         {% block breadcrumbs %}{% endblock %}
       </div>
       <div class="col-lg-4 col-md-4">
-        <button class="btn btn-primary m-2">
+        <a id="new-thread-button" href="{% url 'thread_new' %}" class="btn btn-primary m-2" method="POST">
           Create new thread
-        </button>
+        </a>
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
                 {% if c.parent == s %}
                   <li>
                     <a href="{% url 'threads' s_id=c.pk %}">
-                      {{ c }}
+                      {{ c|slice_string }}
                       <span class="badge badge-primary badge-pill pull-right">{{ c.threads.count }}</span>
                     </a>
                   </li>

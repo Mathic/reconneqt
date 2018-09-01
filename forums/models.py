@@ -7,7 +7,10 @@ class Subject(models.Model):
     parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE, related_name='children')
 
     def __str__(self):
-        return self.subject_name
+        if self.parent is None:
+            return self.subject_name
+        else:
+            return "{} / {}".format(self.parent, self.subject_name)
 
 class Thread(models.Model):
     title = models.CharField(max_length=100)

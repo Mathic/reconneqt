@@ -148,7 +148,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_heroku.settings(locals())
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/habits'
+LOGIN_REDIRECT_URL = '/reconneqt'
 
 from django.conf.global_settings import DATETIME_INPUT_FORMATS, DATE_INPUT_FORMATS
 DATE_INPUT_FORMATS += ("%Y-%m-%d",)
