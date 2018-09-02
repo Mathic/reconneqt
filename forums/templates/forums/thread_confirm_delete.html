@@ -1,0 +1,13 @@
+{% extends 'forums/base_forums.html' %}
+
+{% block threads %}
+<div class="thread p-2">
+  <form method="post">{% csrf_token %}
+      <p>Are you sure you want to delete "{{ object }}"?</p>
+      <input class="btn btn-primary" type="submit" value="Confirm">
+      <a class="btn btn-primary" href="{% url 'thread_detail' pk=object.id %}">
+        <i class="fas fa-arrow-left"></i> Go back
+      </a>
+  </form>
+</div>
+{% endblock %}

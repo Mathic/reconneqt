@@ -19,7 +19,7 @@
   <ul class="pagination">
     {% if threads.has_previous %}
       <li class="page-item">
-        <a class="page-link" href="?page={{ actions.previous_page_number }}">&laquo;</a>
+        <a class="page-link" href="?page={{ threads.previous_page_number }}">&laquo;</a>
       </li>
     {% else %}
       <li class="page-item disabled">
@@ -39,7 +39,7 @@
     {% endfor %}
     {% if threads.has_next %}
       <li class="page-item">
-        <a class="page-link" href="?page={{ actions.next_page_number }}">&raquo;</a>
+        <a class="page-link" href="?page={{ threads.next_page_number }}">&raquo;</a>
       </li>
     {% else %}
       <li class="page-item disabled">

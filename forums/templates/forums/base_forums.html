@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block content %}
-
 <!-- Masthead -->
 <header class="masthead-forums text-white text-center">
   <div class="overlay"></div>
@@ -62,4 +61,9 @@
 
 {% block section %}{% endblock %}
 
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'habits/js/reconneqt.js' %}"></script>
+  {% block extrajs %}{% endblock %}
 {% endblock %}

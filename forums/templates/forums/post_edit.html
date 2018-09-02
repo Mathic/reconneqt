@@ -10,7 +10,7 @@
 
 {% block threads %}
 <div class="thread p-2">
-  <h3>Replying to thread</h3>
+  <h3 style="border-bottom: 1px solid #c9cccd">{{ header }}</h3>
   <div class="posttop p-2">
     <div class="userinfo pull-left">
       {{ post.user }}
@@ -30,7 +30,11 @@
       <div class="posted pull-left"><i class="far fa-clock"></i> Posted on : {{ post.post_created }}</div>
     {% endif %}
     <div class="next pull-right">
-      <a href="{% url 'thread_detail' pk=thread.id %}"><span class="badge badge-pill badge-primary">Go back <i class="fas fa-arrow-left"></i></span></a>
+      <a href="{% url 'thread_detail' pk=thread.id %}">
+        <span class="badge badge-pill badge-primary">
+          <i class="fas fa-arrow-left"></i> Go back
+        </span>
+      </a>
     </div>
     <div class="clearfix"></div>
   </div>

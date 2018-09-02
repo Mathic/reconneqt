@@ -31,15 +31,62 @@
         <div class="posted pull-left"><i class="far fa-clock"></i> Posted on : {{ post.post_created }}</div>
       {% endif %}
       <div class="next pull-right">
-        <a href="{% url 'post_new' pk=thread.id %}"><i class="fa fa-reply"></i></a>
-        <a href="#"><i class="fa fa-flag"></i></a>
+        {% if post.user == request.user %}
+        <a href="{% url 'thread_edit' pk=thread.id %}" data-toggle="tooltip" data-placement="bottom" title="Edit post">
+          <i class="far fa-edit"></i>
+        </a>
+        <a href="{% url 'thread_delete' pk=thread.id %}" data-toggle="tooltip" data-placement="bottom" title="Delete thread">
+          <i class="far fa-trash-alt"></i>
+        </a>
+        {% endif %}
+        <a href="{% url 'post_new' pk=thread.id %}" data-toggle="tooltip" data-placement="bottom" title="Reply to post">
+          <i class="fa fa-reply"></i>
+        </a>
+        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Flag post">
+          <i class="fa fa-flag"></i>
+        </a>
       </div>
       <div class="clearfix"></div>
     </div>
   </div>
-  {% if posts.count == 0 %}
+  {% if num_posts == 0 %}
     No replies
   {% else %}
+    <!-- Pagination -->
+    <div class="actions-pagination">
+      <ul class="pagination">
+        {% if posts.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ posts.previous_page_number }}">&laquo;</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#">&laquo;</a>
+          </li>
+        {% endif %}
+        {% for page in posts.paginator.page_range %}
+          {% if posts.number == page %}
+            <li class="page-item active">
+              <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+        {% if posts.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ posts.next_page_number }}">&raquo;</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#">&raquo;</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+    <!-- Pagination end -->
     {% for p in posts %}
       <div class="thread ml-5">
         <div class="posttop p-2">
@@ -57,8 +104,20 @@
             <div class="posted pull-left"><i class="far fa-clock"></i> Posted on : {{ p.post_created }}</div>
           {% endif %}
           <div class="next pull-right">
-            <a href="#"><i class="fa fa-reply"></i></a>
-            <a href="#"><i class="fa fa-flag"></i></a>
+            {% if p.user == request.user %}
+            <a href="{% url 'post_edit' pk=p.id %}" data-toggle="tooltip" data-placement="bottom" title="Edit post">
+              <i class="far fa-edit"></i>
+            </a>
+            <a href="{% url 'post_delete' pk=p.id %}" data-toggle="tooltip" data-placement="bottom" title="Delete post">
+              <i class="far fa-trash-alt"></i>
+            </a>
+            {% endif %}
+            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Reply to post">
+              <i class="fa fa-reply"></i>
+            </a>
+            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Flag post">
+              <i class="fa fa-flag"></i>
+            </a>
           </div>
           <div class="clearfix"></div>
         </div>

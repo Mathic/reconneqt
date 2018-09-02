@@ -13,5 +13,4 @@ def get_num_posts(threads):
 @register.filter(name='slice_string')
 def slice_string(value):
     parent, child = str(value).split('/')
-    print("{} {}".format(parent, child))
     return child

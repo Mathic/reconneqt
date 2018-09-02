@@ -7,7 +7,6 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.views.generic.edit import DeleteView
 
 from ..forms import HabitForm
