@@ -18,6 +18,7 @@ gunicorn = "*"
 django-widget-tweaks = "*"
 humanfriendly = "*"
 djangorestframework = "*"
+social-auth-app-django = "*"
 
 [dev-packages]
 
