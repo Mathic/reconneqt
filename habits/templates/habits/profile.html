@@ -1,0 +1,19 @@
+{% extends "habits/base_template.html" %}
+{% load staticfiles %}
+
+{% block extracss %}
+<link href="{% static 'habits/css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <p></p>
+  <p> Hello {{ user }} profile. </p>
+  <p> Number of habits: {{ habit_count }}. </p>
+  <p> Number of actions: {{ action_count }} </p>
+  <p> Number of motives: {{ motive_count }} </p>
+  <p> Longest action streak: 0 </p>
+  <p> Number of threads: {{ thread_count }} </p>
+  <p> Number of posts: {{ post_count }} </p>
+</div>
+{% endblock %}

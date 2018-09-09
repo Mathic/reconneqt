@@ -6,6 +6,7 @@
 {% block css %}
 <link href="{% static 'habits/css/sb-admin.css' %}" rel="stylesheet">
 <link href="{% static 'habits/css/habits.css' %}" rel="stylesheet">
+{% block extracss %}{% endblock %}
 {% endblock %}
 
 {% block content %}
@@ -14,13 +15,19 @@
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
-      <li class="nav-item" style="border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important; border-top: 1px solid rgba(255, 255, 255, 0.5) !important; margin-right: 0;">
+      <li class="nav-item top-border bottom-border">
+        <a class="nav-link" href="{% url 'journal' %}">
+          <i class="fas fa-book-open"></i>
+          <span>Journal Entry</span>
+        </a>
+      </li>
+      <li class="nav-item bottom-border">
         <a class="nav-link" href="{% url 'motives' %}">
           <i class="far fa-lightbulb"></i>
           <span>Motives</span>
         </a>
       </li>
-      <li class="nav-item" style="border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important; margin-right: 0;">
+      <li class="nav-item bottom-border">
         <a class="nav-link" href="{% url 'progress' %}">
           <i class="fas fa-calendar-alt"></i>
           <span>Progress</span>
@@ -47,7 +54,7 @@
         {% endif %}
       </li>
       {% endfor %}
-      <li class="nav-item" style="border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important; border-top: 1px solid rgba(255, 255, 255, 0.5) !important; margin-right: 0;">
+      <li class="nav-item top-border bottom-border">
         <span data-toggle="modal">
           <a id="new-habit-button" class="nav-link" data-target="#modal" data-form="{% url 'habit_new' %}" href="#" data-toggle="tooltip" data-placement="right" title="Add a habit">
             <i class="far fa-plus-square"></i>
@@ -61,14 +68,6 @@
       <div class="container-fluid">
         <div class="modal fade" id="edit-modal"></div>
           {% block main %}{% endblock %}
-          <!-- Sticky Footer -->
-          <footer class="sticky-footer">
-            <div class="container my-auto">
-              <div class="copyright text-center my-auto">
-                <span>Copyright © ReconneQt 2018</span>
-              </div>
-            </div>
-          </footer>
         </div>
       </div>
     </div>

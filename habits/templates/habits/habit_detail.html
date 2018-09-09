@@ -53,12 +53,6 @@
     <div class="habit-buttons col-lg-3 col-md-5 btn-toolbar justify-content-between">
       <div class="btn-group">
         <span data-toggle="modal">
-          <a id="new-action-button" data-form="{% url 'action_new' habit_id=habit.id %}" href="#" class="btn btn-primary btn-sm m-2" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Add an action">
-            <i class="far fa-plus-square"></i>
-          </a>
-        </span>
-
-        <span data-toggle="modal">
           <a id="edit-habit-button" data-form="{% url 'habit_edit' habit_id=habit.id %}" href="#" class="btn btn-primary btn-sm m-2" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Edit {{ habit }}">
             <i class="fas fa-pencil-alt"></i>
           </a>
@@ -75,21 +69,31 @@
   </div>
 
   <div class="row">
+    <div class="card mr-3 mb-3" style="width: 20rem;">
+      <div class="card-body">
+        Add a new action
+      </div>
+      <div class="card-footer text-muted">
+        <span data-toggle="modal">
+          <a id="new-action-button" data-form="{% url 'action_new' habit_id=habit.id %}" href="#" class="btn btn-sm delete-action-button pull-right" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" title="Add an action">
+            <i class="far fa-plus-square"></i>
+          </a>
+        </span>
+      </div>
+    </div>
     {% for action in actions %}
       <div class="card mr-3 mb-3" style="width: 20rem;">
-        
         <div class="card-body">
-          Action: {{ action }}
+          Motives:
+          {% for t in action.motives.all %}
+          {{ t }},
+          {% endfor %}
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            Motives:
-            {% for t in action.motives.all %}
-            {{ t }},
-            {% endfor %}
-          </li>
           {% if action.action_end %}
-            <li class="list-group-item"><i class="fas fa-hourglass-half"></i> {{ action.action_start|get_duration:action.action_end }}</li>
+            <li class="list-group-item">
+              <i class="fas fa-hourglass-half"></i> {{ action.action_start|get_duration:action.action_end }}
+            </li>
           {% endif %}
         </ul>
         <div class="card-footer text-muted">
@@ -102,7 +106,7 @@
           </span>
 
           <span data-toggle="modal">
-            <a data-form="{% url 'action_delete' pk=action.pk %}" href="#" class="btn btn-sm delete-action-button  pull-right" style="padding: 0.5rem;" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" id="delete-action-button" title="Delete {{ action|truncatewords:"4" }}">
+            <a data-form="{% url 'action_delete' pk=action.pk %}" href="#" class="btn btn-sm delete-action-button pull-right" style="padding: 0.5rem;" role="button" data-toggle="tooltip" data-target="#modal" data-placement="bottom" id="delete-action-button" title="Delete {{ action|truncatewords:"4" }}">
               <i class="far fa-minus-square"></i>
             </a>
           </span>

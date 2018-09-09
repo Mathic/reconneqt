@@ -14,7 +14,7 @@ class ActionForm(forms.ModelForm):
 
     class Meta:
         model = Action
-        fields = ('action_name', 'motives', 'action_start', 'action_end')
+        fields = ('motives', 'action_start', 'action_end')
 
         widgets = {
             'action_start': forms.DateTimeInput(attrs={'class': 'datetime-input'}),

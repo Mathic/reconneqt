@@ -21,8 +21,11 @@ urlpatterns = [
     path('motives/<int:pk>/edit/', views.motive_edit, name='motive_edit'),
     path('delete_motive/<int:pk>/', views.MotiveDelete.as_view(), name='motive_delete'),
 
-    path('progress/', views.progress, name='progress'),
+    path('journal/', views.journal, name='journal'),
 
+    path('profile/', views.profile, name='profile'),
+
+    path('progress/', views.progress, name='progress'),
     path('progress/api/chart/data', views.Progress.as_view(), name='chart_data'),
 ]
 

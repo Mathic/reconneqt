@@ -96,3 +96,15 @@ def error_404(request):
 def error_500(request):
     data = {}
     return render(request, 'habits/error_500.html', data)
+
+def journal(request):
+    try:
+        user_id = int(request.user.id)
+        habit_list = Habit.objects.filter(user_id=user_id)
+
+        context = {
+            'habit_list': habit_list,
+        }
+    except Habit.DoesNotExist:
+        raise Http404("Habit does not exist")
+    return render(request, 'habits/journal.html', context)
