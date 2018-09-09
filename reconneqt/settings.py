@@ -165,11 +165,19 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/reconneqt'
 
-SOCIAL_AUTH_FACEBOOK_KEY = '289143125231903'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'a7e3f8e07aff90b4f45593130f23c496'  # App Secret
+# SOCIAL_AUTH_FACEBOOK_KEY = '289143125231903'  # App ID
+# SOCIAL_AUTH_FACEBOOK_SECRET = 'a7e3f8e07aff90b4f45593130f23c496'  # App Secret
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '8995836886-ul9djssp2idbdhl07r331anqdn1am1ru.apps.googleusercontent.com'  #Paste CLient Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'cW4croy6AW193ZxqW279gAB1' #Paste Secret Key
+# localhost
+SOCIAL_AUTH_FACEBOOK_KEY = '1414077185403650'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'a2dbc2bc02a2b32205d18e78b362b3f9'  # App Secret
+
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '8995836886-ul9djssp2idbdhl07r331anqdn1am1ru.apps.googleusercontent.com'  #Paste CLient Key
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'cW4croy6AW193ZxqW279gAB1' #Paste Secret Key
+
+# localhost
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '8995836886-qpn5n57a5je0ugeh9ipkqk73are1vk6m.apps.googleusercontent.com'  #Paste CLient Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'SwbmvUtf1CWf9BMyqgYkuwG6' #Paste Secret Key
 
 from django.conf.global_settings import DATETIME_INPUT_FORMATS, DATE_INPUT_FORMATS
 DATE_INPUT_FORMATS += ("%Y-%m-%d",)
