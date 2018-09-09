@@ -21,5 +21,6 @@ urlpatterns = [
     path('reconneqt/', include('habits.urls')),
     path('forums/', include('forums.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
     path('admin/', admin.site.urls),
 ]
